@@ -1,0 +1,4 @@
+export interface CalledShot {key:string;label:string;mod:number}
+export const CALLED_SHOT_MODIFIER='SDF.CalledShotModifier';
+export const CALLED_SHOTS:CalledShot[]=[{key:'vitals',label:'SDF.CalledShot.vitals',mod:4},{key:'location',label:'SDF.CalledShot.location',mod:4},{key:'knockDown',label:'SDF.CalledShot.knockDown',mod:4},{key:'dirtyTrick',label:'SDF.CalledShot.dirtyTrick',mod:4},{key:'blastOutOfHand',label:'SDF.CalledShot.blastOutOfHand',mod:4},{key:'breakWeapon',label:'SDF.CalledShot.breakWeapon',mod:4},{key:'breakArmor',label:'SDF.CalledShot.breakArmor',mod:4},{key:'feint',label:'SDF.CalledShot.feint',mod:4},{key:'shakeUp',label:'SDF.CalledShot.shakeUp',mod:4},{key:'trickShot',label:'SDF.CalledShot.trickShot',mod:4},{key:'splitDamage',label:'SDF.CalledShot.splitDamage',mod:4}];
+export const calledShotByKey=(key?:string)=>CALLED_SHOTS.find(shot=>shot.key===key);

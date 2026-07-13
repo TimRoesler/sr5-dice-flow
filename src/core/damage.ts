@@ -1,0 +1,2 @@
+export interface DamageInput{base:number;netHits:number;ap?:number;armor?:number;soakHits?:number;minimum?:number}
+export function calculateDamage(i:DamageInput){const modified=Math.max(i.minimum??0,i.base+Math.max(0,i.netHits));const effectiveArmor=Math.max(0,(i.armor??0)+(i.ap??0));const final=Math.max(0,modified-(i.soakHits??0));return{base:i.base,netHits:Math.max(0,i.netHits),modified,effectiveArmor,soakHits:i.soakHits??0,final}}

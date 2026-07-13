@@ -1,0 +1,11 @@
+import{describe,expect,it}from'vitest';import{economyOverBudget,economyWarnings,emptyEconomy,isCurrentEconomy,recordAction,type EconomyState}from'../src/core/economy';
+const seq=(entries:[string,any][],round=1,pass=1)=>entries.reduce<EconomyState|undefined>((state,[rollId,type],index)=>recordAction(state,round,pass,{rollId:rollId||`r${index}`,type}),undefined)!;
+describe('action economy',()=>{
+ it('accumulates action types within a pass',()=>{const state=seq([['a','simple'],['b','simple'],['c','free']]);expect(state).toMatchObject({round:1,pass:1,simpleUsed:2,free:1,complexUsed:0});expect(economyOverBudget(state)).toBe(false)});
+ it('ignores repeated roll ids so re-renders do not double count',()=>{let state=recordAction(undefined,1,1,{rollId:'x',type:'complex'});state=recordAction(state,1,1,{rollId:'x',type:'complex'});expect(state.complexUsed).toBe(1);expect(state.applied).toHaveLength(1)});
+ it('resets the budget when the pass or round changes',()=>{let state=recordAction(undefined,1,1,{rollId:'a',type:'complex'});expect(isCurrentEconomy(state,1,2)).toBe(false);state=recordAction(state,1,2,{rollId:'b',type:'simple'});expect(state).toMatchObject({pass:2,complexUsed:0,simpleUsed:1});expect(state.applied).toEqual(['b'])});
+ it('tracks interrupts with their initiative modifier',()=>{const state=recordAction(undefined,2,1,{rollId:'i',type:'interrupt',label:'Full Defense',iniMod:-10});expect(state.interrupts).toEqual([{label:'Full Defense',iniMod:-10}])});
+ it('warns on every over-budget combination',()=>{expect(economyWarnings(seq([['a','free'],['b','free']]))).toContain('SDF.Economy.Warn.Free');expect(economyWarnings(seq([['a','complex'],['b','complex']]))).toContain('SDF.Economy.Warn.Complex');expect(economyWarnings(seq([['a','simple'],['b','simple'],['c','simple']]))).toContain('SDF.Economy.Warn.Simple');expect(economyWarnings(seq([['a','complex'],['b','simple']]))).toContain('SDF.Economy.Warn.Mixed')});
+ it('leaves an empty budget unflagged',()=>{expect(economyWarnings(emptyEconomy(1,1))).toEqual([]);expect(economyOverBudget(emptyEconomy(1,1))).toBe(false)});
+ it('does not count varies actions against the simple or complex budget',()=>{const state=recordAction(undefined,1,1,{rollId:'v',type:'varies'});expect(state).toMatchObject({varies:1,simpleUsed:0,complexUsed:0});expect(economyOverBudget(state)).toBe(false)});
+});

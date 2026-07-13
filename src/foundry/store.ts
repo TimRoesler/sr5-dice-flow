@@ -1,0 +1,5 @@
+import {FLAG_KEY,MODULE_ID,type Transaction} from '../types'; import {migrate} from '../core/transaction'; import {renderCard} from './card';
+export async function getTransaction(messageOrUuid:any):Promise<Transaction|undefined>{const message=typeof messageOrUuid==='string'?await fromUuid(messageOrUuid):messageOrUuid;const stored=message?.getFlag(MODULE_ID,FLAG_KEY);return stored?migrate(stored):undefined}
+export async function saveTransaction(message:any,tx:Transaction){const content=renderCard(tx,{isGM:game.user.isGM,canAuthor:game.user.id===tx.authorId});await message.update({content,[`flags.${MODULE_ID}.${FLAG_KEY}`]:tx});return tx}
+export async function attachTransaction(message:any,tx:Transaction){tx.messageUuid=message.uuid;await saveTransaction(message,tx);return message}
+export async function createMessage(tx:Transaction,rollMode=game.settings.get('core','messageMode')){const data:any={content:renderCard(tx,{isGM:game.user.isGM,canAuthor:true}),speaker:ChatMessage.getSpeaker(),flags:{[MODULE_ID]:{[FLAG_KEY]:tx}}};ChatMessage.applyMode(data,rollMode);const message=await ChatMessage.create(data);return attachTransaction(message,tx)}

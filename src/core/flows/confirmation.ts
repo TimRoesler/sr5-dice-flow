@@ -1,0 +1,2 @@
+import type{StageConfirmation}from'./spec';import type{Branch}from'../../types';
+export function confirmationAvailable(confirmation:StageConfirmation,branch:Branch){if(branch.confirmations[confirmation.id])return false;if(confirmation.when==='always')return true;if(confirmation.when==='done')return branch.stageId==='done';if(confirmation.when==='self')return branch.kind==='self';if(confirmation.when.startsWith('derived.'))return Number(branch.derived[confirmation.when.slice(8)]??0)>0;return false}

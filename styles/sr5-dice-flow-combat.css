@@ -1,0 +1,5 @@
+.sr5-dice-flow .sdf-combat-origin{display:grid;grid-template-columns:repeat(auto-fit,minmax(11rem,1fr));gap:.4rem}.sr5-dice-flow .sdf-combat-group{padding:.3rem .4rem;border:1px solid var(--sr5-theme-border);border-radius:5px}.sr5-dice-flow .sdf-combat-group>.metric-row{display:flex;justify-content:space-between;gap:.4rem;padding:.1rem 0}.sr5-dice-flow .sdf-combat-group .value-result{text-align:right;font-weight:700}.sr5-dice-flow .sdf-combat-group summary{padding:0 0 .2rem}
+
+.sdf-combat-advisory{margin:.25rem 0;padding:.35rem .5rem;border:1px solid rgba(204,153,51,.55);border-radius:6px;background:rgba(204,153,51,.12)}.sdf-combat-advisory strong{color:#b8860b}.sdf-combat-advisory p{margin:.2rem 0 0;font-size:var(--font-size-11);color:var(--sr5-theme-text-secondary)}
+
+.sdf-called-shot-badge{margin:.35rem .45rem;padding:.3rem .5rem;border:1px solid rgba(204,153,51,.55);border-radius:6px;background:rgba(204,153,51,.12);color:#b8860b;font-weight:700;text-align:center}.sdf-called-shot-group strong{color:#b8860b}

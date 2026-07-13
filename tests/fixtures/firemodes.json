@@ -1,0 +1,86 @@
+[
+  {
+    "name": "single-shot",
+    "data": {
+      "type": "RangedAttackTest",
+      "fireMode": { "label": "SR5.FireModes.SS", "value": 1, "defense": 0, "action": "simple" },
+      "opposed": { "test": "PhysicalDefenseTest", "resist": { "test": "PhysicalResistTest" } },
+      "pool": { "value": 10, "changes": [] }
+    },
+    "flow": "combat-attack",
+    "rounds": 1,
+    "defense": 0,
+    "suppression": false,
+    "poolGroups": []
+  },
+  {
+    "name": "semi-auto-burst",
+    "data": {
+      "type": "RangedAttackTest",
+      "fireMode": { "label": "SR5.FireModes.SB", "value": 3, "defense": -2 },
+      "opposed": { "test": "PhysicalDefenseTest" },
+      "pool": { "value": 9, "changes": [ { "name": "SR5.Recoil", "value": -1 }, { "name": "SR5.Range", "value": -1 } ] }
+    },
+    "flow": "combat-attack",
+    "rounds": 3,
+    "defense": -2,
+    "suppression": false,
+    "poolGroups": ["recoil", "range"]
+  },
+  {
+    "name": "burst-fire",
+    "data": {
+      "type": "RangedAttackTest",
+      "fireMode": { "label": "SR5.FireModes.BF", "value": 3, "defense": -2 },
+      "opposed": { "test": "PhysicalDefenseTest" },
+      "pool": { "changes": [ { "name": "SR5.Recoil", "value": -2 } ] }
+    },
+    "flow": "combat-attack",
+    "rounds": 3,
+    "defense": -2,
+    "suppression": false,
+    "poolGroups": ["recoil"]
+  },
+  {
+    "name": "full-auto",
+    "data": {
+      "type": "RangedAttackTest",
+      "fireMode": { "label": "SR5.FireModes.FA", "value": 6, "defense": -5 },
+      "opposed": { "test": "PhysicalDefenseTest" },
+      "pool": { "changes": [ { "name": "SR5.Recoil", "value": -5 }, { "name": "SR5.Wounds", "value": -2 } ] }
+    },
+    "flow": "combat-attack",
+    "rounds": 6,
+    "defense": -5,
+    "suppression": false,
+    "poolGroups": ["recoil", "wounds"]
+  },
+  {
+    "name": "suppression",
+    "data": {
+      "type": "RangedAttackTest",
+      "fireMode": { "label": "SR5.FireModes.Suppression", "value": 20, "suppression": true },
+      "opposed": { "test": "PhysicalDefenseTest" },
+      "pool": { "changes": [] }
+    },
+    "flow": "suppression",
+    "rounds": 20,
+    "defense": 0,
+    "suppression": true,
+    "poolGroups": []
+  },
+  {
+    "name": "melee",
+    "data": {
+      "type": "MeleeAttackTest",
+      "reach": 1,
+      "opposed": { "test": "PhysicalDefenseTest", "resist": { "test": "PhysicalResistTest" } },
+      "pool": { "changes": [] }
+    },
+    "flow": "combat-attack",
+    "rounds": 0,
+    "defense": 0,
+    "suppression": false,
+    "poolGroups": []
+  }
+]

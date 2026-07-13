@@ -1,0 +1,9 @@
+export type ActionType='free'|'simple'|'complex'|'interrupt'|'varies';
+export const ECONOMY_ACTION_TYPES:ActionType[]=['free','simple','complex','interrupt','varies'];
+export interface EconomyEntry {rollId:string;type:ActionType;label?:string;iniMod?:number}
+export interface EconomyState {round:number;pass:number;free:number;simpleUsed:number;complexUsed:number;interrupts:{label?:string;iniMod?:number}[];varies:number;applied:string[]}
+export const emptyEconomy=(round:number,pass:number):EconomyState=>({round,pass,free:0,simpleUsed:0,complexUsed:0,interrupts:[],varies:0,applied:[]});
+export const isCurrentEconomy=(state:EconomyState|undefined,round:number,pass:number)=>Boolean(state&&state.round===round&&state.pass===pass);
+export function recordAction(state:EconomyState|undefined,round:number,pass:number,entry:EconomyEntry):EconomyState{const base=isCurrentEconomy(state,round,pass)?{...state!,interrupts:[...state!.interrupts],applied:[...state!.applied]}:emptyEconomy(round,pass);if(base.applied.includes(entry.rollId))return base;base.applied.push(entry.rollId);if(entry.type==='free')base.free+=1;else if(entry.type==='simple')base.simpleUsed+=1;else if(entry.type==='complex')base.complexUsed+=1;else if(entry.type==='interrupt')base.interrupts.push({label:entry.label,iniMod:entry.iniMod});else if(entry.type==='varies')base.varies+=1;return base}
+export function economyWarnings(state:EconomyState):string[]{const warnings:string[]=[];if(state.free>1)warnings.push('SDF.Economy.Warn.Free');if(state.complexUsed>1)warnings.push('SDF.Economy.Warn.Complex');if(state.simpleUsed>2)warnings.push('SDF.Economy.Warn.Simple');if(state.complexUsed>=1&&state.simpleUsed>=1)warnings.push('SDF.Economy.Warn.Mixed');return warnings}
+export const economyOverBudget=(state:EconomyState)=>economyWarnings(state).length>0;

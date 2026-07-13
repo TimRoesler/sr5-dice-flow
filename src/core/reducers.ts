@@ -1,0 +1,7 @@
+import type{StageReducer}from'./flows/spec';
+export class ReducerRegistry{private reducers=new Map<string,StageReducer>();register(id:string,reducer:StageReducer){if(this.reducers.has(id))throw new Error(`Reducer already registered: ${id}`);this.reducers.set(id,reducer);return()=>this.reducers.delete(id)}get(id:string){const reducer=this.reducers.get(id);if(!reducer)throw new Error(`Unknown reducer: ${id}`);return reducer}has(id:string){return this.reducers.has(id)}ids(){return[...this.reducers.keys()]}}
+export const mergeReducer:StageReducer=({data})=>{const value=(data??{})as any;return{outcome:value.outcome,derived:value.derived??value,stageData:value.stageData}};
+export const opposedHitsReducer:StageReducer=({origin,roll})=>{const netHits=Math.max(0,(origin.hits??0)-(roll.hits??0));return{outcome:netHits>0?'success':'failure',derived:{netHits}}};
+export const soakDamageReducer:StageReducer=({branch,roll})=>{const soakHits=roll.hits??0;const finalDamage=Math.max(0,Number(branch.derived.modifiedDamage??branch.derived.baseDamage??0)-soakHits);return{outcome:finalDamage>0?'success':'failure',derived:{soakHits,finalDamage}}};
+export function createReducerRegistry(){const registry=new ReducerRegistry();registry.register('merge',mergeReducer);registry.register('opposedHits',opposedHitsReducer);registry.register('soakDamage',soakDamageReducer);return registry}
+export const reducers=createReducerRegistry();

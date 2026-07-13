@@ -1,0 +1,9 @@
+import{describe,expect,it,vi}from'vitest';import{shouldSuppressFollowupMessage}from'../src/foundry/integration';
+const txWith=(...ids:string[])=>({schemaVersion:2,flowId:'combat-attack',branches:Object.fromEntries(ids.map(id=>[id,{id,actorUuid:`actor-${id}`}]))});
+describe('single-card follow-up messages',()=>{
+    it('cancels a module defense follow-up that resolves to a target branch',()=>{const data={flags:{shadowrun5e:{TestData:{data:{sr5DiceFlow:{messageId:'attack',targetId:'a',step:'defense'}}}}}};const original={getFlag:vi.fn(()=>txWith('a'))};expect(shouldSuppressFollowupMessage(data,()=>original)).toBe(true);expect(original.getFlag).toHaveBeenCalledWith('sr5-dice-flow','transaction')});
+    it('cancels a system-chained resist message via the inherited flow marker',()=>{const data={flags:{shadowrun5e:{TestData:{data:{following:{sr5DiceFlow:{messageId:'attack',targetId:'a',step:'defense'}}}}}}};const original={getFlag:vi.fn(()=>txWith('a'))};expect(shouldSuppressFollowupMessage(data,()=>original)).toBe(true)});
+    it('does not cancel unrelated SR5 messages',()=>{expect(shouldSuppressFollowupMessage({flags:{shadowrun5e:{TestData:{data:{}}}}},()=>undefined)).toBe(false)});
+    it('does not swallow a system followup (drain/fade) that has no target branch',()=>{const data={flags:{shadowrun5e:{TestData:{data:{previousMessageId:'cast',following:{}}}}}};const original={getFlag:vi.fn(()=>txWith('a'))};expect(shouldSuppressFollowupMessage(data,()=>original)).toBe(false)});
+    it('does not cancel when the referenced target branch no longer exists',()=>{const data={flags:{shadowrun5e:{TestData:{data:{sr5DiceFlow:{messageId:'attack',targetId:'gone',step:'defense'}}}}}};const original={getFlag:vi.fn(()=>txWith('a'))};expect(shouldSuppressFollowupMessage(data,()=>original)).toBe(false)});
+});

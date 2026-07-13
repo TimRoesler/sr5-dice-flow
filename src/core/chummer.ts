@@ -1,0 +1,11 @@
+import type {Modifier,ModifierContext} from '../types';
+const norm=(s:string='')=>s.normalize('NFKD').replace(/[\u0300-\u036f]/g,'').toLowerCase().replace(/[^a-z0-9]+/g,' ').trim();
+interface Rule{names:string[];types:string[];page:number;rating?:boolean;condition?:'equipped'|'wireless';modifier:{test:string;value:number;label:string}}
+export const CORE_RULES:Rule[]=[
+ {names:['Reflex Recorder','Reflexrekorder'],types:['cyberware','bioware'],page:455,rating:true,modifier:{test:'skill',value:1,label:'Reflex Recorder'}},
+ {names:['Smartlink','Smartgun-System'],types:['cyberware','equipment','weapon'],page:433,condition:'wireless',modifier:{test:'ranged',value:2,label:'Smartlink (wireless)'}},
+ {names:['Vision Enhancement','Sichtverbesserung'],types:['cyberware','equipment'],page:444,rating:true,condition:'equipped',modifier:{test:'visual',value:1,label:'Vision Enhancement'}},
+ {names:['Pain Editor','Schmerzeditor'],types:['bioware'],page:460,modifier:{test:'willpower',value:1,label:'Pain Editor'}},
+ {names:['Home Ground','Heimvorteil'],types:['quality'],page:74,modifier:{test:'situational',value:2,label:'Home Ground'}}];
+function source(item:any){return String(item.system?.source??item.system?.book??item.flags?.chummer?.source??'').toUpperCase()}
+export function chummerModifiers(ctx:ModifierContext):Modifier[]{const result:Modifier[]=[];for(const item of ctx.actor?.items??[]){const matches=CORE_RULES.filter(r=>r.types.includes(item.type)&&r.names.some(n=>norm(n)===norm(item.name))&&(!source(item)||source(item)==='SR5'));if(matches.length!==1){if(matches.length>1||CORE_RULES.some(r=>r.names.some(n=>norm(n)===norm(item.name))))result.push({id:`warning-${item.id}`,label:item.name,value:0,source:'Chummer',warning:matches.length?'Ambiguous core rule':'Source is not SR5'});continue}const r=matches[0]!;if(r.modifier.test!=='situational'&&!ctx.testType.toLowerCase().includes(r.modifier.test))continue;if(r.condition==='wireless'&&!(item.system?.wirelessBonus||item.system?.wireless))continue;if(r.condition==='equipped'&&item.system?.equipped===false)continue;const rating=r.rating?Number(item.system?.rating??1):1;result.push({id:`chummer-${item.id}`,label:r.modifier.label,value:r.modifier.value*rating,source:`SR5 p. ${r.page}`,condition:r.condition,fingerprint:`sr5:${r.page}:${norm(r.names[0])}:${rating}`,virtual:true})}return result}
