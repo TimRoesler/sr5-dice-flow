@@ -2,6 +2,13 @@
 
 All notable changes to SR5 Dice Flow are documented here. Versions follow the module's release schedule (see `docs/DEVELOPMENT-PLAN.md`).
 
+## v2.3.2 — Chat-Karten-Feinschliff
+
+### Changed
+
+- **Chat-Karten an das System-Theme gekoppelt**: hartkodierte Farben (Verdikt, Edge, Aktionsökonomie, Kampf-Hinweis, Called Shot) durch die Theme-Tokens des Character Sheets ersetzt (`--sr5-theme-failure/success/glitch-a/label`, getönt via `color-mix`). Passt sich damit automatisch an helles und dunkles Sheet-Theme an.
+- **Kompaktere Darstellung**: kleinere Innen-/Außenabstände und Lücken, schmalere Ziel-/Kampf-Spalten (12→10rem bzw. 11→9,5rem), niedrigere Buttons und dezenterer Eckenradius. Rein kosmetisch, keine Funktionsänderung.
+
 ## v2.3.1 — Bugfix
 
 ### Fixed
