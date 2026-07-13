@@ -1,8 +1,8 @@
 {
   "id":"sr5-dice-flow","title":"SR5 Dice Flow","description":"Versioned, multi-target SR5 test transactions and live chat cards.","version":"2.3.1",
   "authors":[{"name":"TRO"}],"url":"https://github.com/TimRoesler/sr5-dice-flow",
-  "manifest":"https://raw.githubusercontent.com/TimRoesler/sr5-dice-flow/main/module.json",
-  "download":"https://github.com/TimRoesler/sr5-dice-flow/releases/download/v2.3.0/sr5-dice-flow.zip",
+  "manifest":"https://github.com/TimRoesler/sr5-dice-flow/releases/latest/download/module.json",
+  "download":"https://github.com/TimRoesler/sr5-dice-flow/releases/latest/download/sr5-dice-flow.zip",
   "compatibility":{"minimum":"14","verified":"14.364","maximum":"14"},
   "relationships":{"systems":[{"id":"shadowrun5e","type":"system","compatibility":{"minimum":"0.36.1.1"}}],"requires":[{"id":"sr5-chummer","type":"module","compatibility":{"minimum":"0.6.0"}},{"id":"lib-wrapper","type":"module"}]},
   "esmodules":["dist/sr5-dice-flow.js"],"styles":["styles/sr5-dice-flow.css","styles/sr5-dice-flow-combat.css"],
