@@ -1,55 +1,50 @@
 # SR5 Dice Flow
 
-Foundry VTT 14 module for Shadowrun 5e `0.36.1.1+`. It records SR5 tests as revisioned, multi-target transactions and renders a live bilingual chat card. Damage is resolved step by step (attack, defense, soak) in a single card and is only applied to an actor through the explicit **apply damage** button, restricted to the GM and actor owners.
+Versionierte, mehrzielfähige Probentransaktionen mit Live-Chat-Karten für das
+Shadowrun-5e-System in Foundry VTT. Das Modul fängt Würfelproben des Systems ab und
+führt sie als revisionierte Transaktion durch komplette Regel-Flows.
 
-Since **v2.0** the card flow runs on a declarative FlowSpec engine and covers the full core-rulebook combat sequence: fire modes with grouped modifiers, deferred ammunition, per-target active-defense buttons (dodge/block/parry/full defense) with a cover selector and an initiative-cost confirmation, suppressive fire, a multi-target pool-split advisory, called shots injected into the attack dialog, and advisory action-economy tracking in the combat tracker. **v2.1** adds magic: spellcasting (with drain), summoning, ritual, binding and banishing. **v2.2** adds the Matrix: data spike, brute force and hack on the fly (with automatic mark display and matrix damage), an overwatch-score readout, complex forms with fade, and sprite compiling. **v2.3** rounds out the core rulebook: extended-test progress cards, first aid / medicine with an apply-healing button, edge-use display, and a success/failure verdict for simple threshold tests (perception, social, vehicle). Everything still mutates actor data only through explicit confirmation buttons — drain, fade, damage and healing are never applied automatically.
+## Funktionen
 
-## Installation in Foundry VTT
+- Fängt SR5-Proben ab und führt sie durch den vollständigen Regel-Flow
+  (Angriff → Verteidigung → Schadenswiderstand → Schaden anwenden)
+- Mehrzielfähig: mehrere Ziele je Angriff in einer Transaktion
+- Live-Chat-Karten mit Bestätigungs-Buttons; Aktor-/Weltdaten werden nie still verändert
+- Deckt Nahkampf, Fernkampf, Magie und Matrix sowie weitere Kernregel-Aktionen ab
 
-**Manifest URL:**
+## Installation
+
+Manifest-URL in Foundry unter *Add-on-Module → Modul installieren* eintragen:
 
 ```text
-https://raw.githubusercontent.com/TimRoesler/sr5-dice-flow/main/module.json
+https://github.com/TimRoesler/sr5-dice-flow/releases/latest/download/module.json
 ```
 
-1. In Foundry VTT, open **Add-on Modules → Install Module**.
-2. Paste the manifest URL above into **Manifest URL**.
-3. Select **Install** and activate **SR5 Dice Flow** in your world.
+Voraussetzungen: das System **Shadowrun 5th Edition** sowie die Module **sr5-chummer**
+(ab 0.6.0) und **lib-wrapper**.
 
-Direct links: [open manifest](https://raw.githubusercontent.com/TimRoesler/sr5-dice-flow/main/module.json) · [download release ZIP](https://github.com/TimRoesler/sr5-dice-flow/releases/download/v2.3.0/sr5-dice-flow.zip)
+## Kompatibilität
 
-Required: `shadowrun5e` 0.36.1.1+, `sr5-chummer` 0.6.0+ and `libWrapper`.
+| Komponente | Anforderung |
+|---|---|
+| Foundry VTT | v14 (verifiziert: 14.364) |
+| Spielsystem | shadowrun5e |
+| Modulversion | 2.3.1 |
 
-For local development run `npm install && npm run validate`; the distributable is written to `release/sr5-dice-flow.zip`.
+## Entwicklung
 
-## Development documentation
+```bash
+npm ci             # Abhängigkeiten
+npm run validate   # Typecheck + Tests + Build
+npm run build      # Build nach dist/
+```
 
-The module is being expanded to cover every player action of the SR5 core rulebook. Start with [AGENTS.md](AGENTS.md) (contributor/agent onboarding), then:
+## Herkunft & Credits
 
-- [docs/DEVELOPMENT-PLAN.md](docs/DEVELOPMENT-PLAN.md) — roadmap, milestones M0–M4, work packages, guardrails
-- [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md) — current v1 architecture and the target v2 FlowSpec engine
-- [docs/FLOWS.md](docs/FLOWS.md) — catalog of all core-rulebook actions with page references and status
-- [docs/TESTING.md](docs/TESTING.md) — manual in-Foundry test checklists per release
+Entwickelt von TRO für den Eigenbetrieb.
 
-## Use and API
+## Lizenz & Markenhinweis
 
-System test messages are observed through documented chat hooks; compatible registered test classes are wrapped through libWrapper. The public API is `game.modules.get("sr5-dice-flow").api` and exposes `create`, `get`, `addTarget`, `registerModifierProvider`, `recalculate`, and `migrate`. Calls which change target reactions must be validated by the active GM. Optimistic revision checks prevent double clicks and stale clients from overwriting state.
-
-The world setting **Confirm ammunition consumption** is enabled by default. Ranged attacks
-apply progressive recoil immediately but consume the selected fire-mode rounds only after an
-owner or GM confirms the ammunition change on the flow card. Disabling the setting restores
-the Shadowrun system's immediate ammunition consumption.
-
-Modifier providers receive `{ actor, item, testType, categories, wireless, equipped }`. Return entries with `label`, numeric `value`, `source`, and preferably a stable `fingerprint`. Higher-priority entries win fingerprint collisions. Personal spontaneous modifiers can be stored in the hidden user-scoped `modifierPresets` setting.
-
-## Privacy and diagnostics
-
-Blind/GM roll JSON is never copied into transaction flags. Foundry roll modes remain authoritative. Each visible modifier contains its source and condition; ambiguous mappings return a warning instead of silently changing the pool. The bundled map intentionally covers only mechanically identifiable SR5 core-book entries and is designed to be extended by providers.
-
-## Edge
-
-The core supports Push the Limit, Second Chance, Blitz, Seize the Initiative, Close Call, and Dead Man's Trigger. Edge is deducted atomically by the active GM workflow and logged as an event. Refunding invalidated Edge is a separate, explicitly confirmed GM operation.
-
-## Compatibility limits
-
-The module does not reproduce rule text, parse arbitrary item prose, change condition monitors, or retrofit old non-module chat messages. Supplement books are outside v1.0.0. Automated Foundry/Quench and Playwright suites require a licensed local Foundry installation and are therefore separate from the deterministic unit suite.
+MIT-Lizenz, siehe [LICENSE](LICENSE). **Shadowrun** ist eine eingetragene Marke von
+The Topps Company, Inc. Dieses nichtkommerzielle Fanprojekt steht in keiner Verbindung zu
+The Topps Company, Inc. oder Catalyst Game Labs.
