@@ -263,7 +263,7 @@ Registrierungsreihenfolge (`src/core/flows/specs/index.ts`) — spezifische Spec
 | `complex-form` | `specs/matrix.ts` | ComplexFormTest | Ziel-defense (`opposedHits`); self:fade (auto) → `apply-fade` | v2.2 |
 | `sprite-compiling` | `specs/matrix.ts` | CompileSpriteTest | self: `conjure-opposed` (Sprite) → fade-Button | v2.2 |
 | `overwatch-check` | `specs/matrix.ts` | CheckOverwatchScoreTest | Anzeige OS (👁), keine Stages | v2.2 |
-| `heal` | `specs/general.ts` | `action.skill` ∈ {first_aid, biotechnology, medicine} | Patienten-Branch(es), `apply-heal`-Confirm | v2.3 |
+| `heal` | `specs/general.ts` | `action.skill` = `first_aid` | Patienten-Branch(es), Monitor-Auswahl (Körperlich/Geistig), `apply-heal`-Confirm für Nettoerfolge | v2.3.2 |
 | `extended` | `specs/general.ts` | `data.extended===true` (nicht opposed) | Fortschritts-Card (kumulative Hits vs. Schwelle) | v2.3 |
 | `generic-opposed` | `specs/generic.ts` | `data.opposed.test` vorhanden | Ziel-Stage `$origin.defenseTest`, `opposedHits` | v2.0 |
 | `generic-simple` | `specs/generic.ts` | Catch-all | keine Stages; Schwellen-Verdikt auf der Karte (v2.3) | v2.0 |

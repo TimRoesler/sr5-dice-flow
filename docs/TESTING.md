@@ -114,7 +114,8 @@ mit Kampfzauber, Decker mit Cyberdeck.
 ## v2.3 — Rest (M4)
 
 - [ ] Fahrzeugprobe / Verfolgungsjagd: läuft über generischen Flow, Kontroll-Rig-Mods sichtbar
-- [ ] Erste Hilfe / Medizin: Probe zeigt Patienten-Branch + „Heilung anwenden"-Button; heilt `hits` Kästchen physisch nur nach Klick (Owner/SL)
+- [ ] Erste Hilfe: Probe zeigt Patienten-Branch, Monitor-Auswahl (Körperlich/Geistig) und „Heilung anwenden"-Button; heilt nur Nettoerfolge über Schwelle 2 nach Klick (Owner/SL)
+- [ ] Medizin / Biotechnologie: bleiben generische Proben; bieten keinen Button zum direkten Entfernen von Schadenskästchen
 - [ ] Ausgedehnte Probe: Karte zeigt kumulative Erfolge / Schwelle + Fortschrittsbalken; „Schwelle erreicht" bei Abschluss (jede Iteration eigene Karte mit laufendem Stand)
 - [ ] Einfache Probe (Wahrnehmung/Sozial/Wissen) mit Schwelle: Erfolg/Misserfolg-Verdikt auf der Karte
 - [ ] Edge (Grenzen überschreiten / Zweiter Versuch): „Edge eingesetzt"-Zeile auf der Karte (Anzeige; Re-Roll macht das System testintern)

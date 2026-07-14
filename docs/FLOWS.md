@@ -125,7 +125,8 @@ noch nicht als eigene Stufe (läuft nativ) · Matrix-Ziele = Hosts/Geräte/IC (`
 |---|---|---|---|
 | Fahrzeugproben, Fahrzeugkampf | 199–205 | über `generic-*` (Rig-Mods aus pool.changes) | ✅ v2.3 |
 | Verfolgungsjagden | 203 f. | opposed + Advisory-Reichweitenband | ⬜ |
-| Erste Hilfe / Medizin | 205–208 | `heal`-FlowSpec, Heilen = Confirm-Button | ✅ v2.3 |
+| Erste Hilfe | 205–208 | `heal`-FlowSpec: Nettoerfolge über Schwelle 2, Monitor-Auswahl, dann Confirm-Button | ✅ v2.3.2 |
+| Medizin / Biotechnologie | 205–208 | kein direkter Heal-Flow (Medizin unterstützt nur Genesungsproben) | ➖ nativ |
 | Natürliche Heilung | 207 | Recovery-Tests über generic/extended | ✅ v2.3 |
 | Magische Heilung (Heilzauber) | 288 | über FlowSpec `spellcasting` abgedeckt | ✅ v2.1 |
 | Ausgedehnte Proben (Karte mit Fortschritt) | 50 | `extended`-FlowSpec | ✅ v2.3 |
