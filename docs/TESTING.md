@@ -111,6 +111,14 @@ mit Kampfzauber, Decker mit Cyberdeck.
 - [ ] Volle Matrixabwehr als Interrupt im Ökonomie-Tracker
 - [ ] ⚠ Bekannte Lücke: Biofeedback-Folge (Heiß-Sim) ist noch nicht als eigene Stufe integriert; läuft nativ als Systemnachricht
 
+## v2.3.3 — Karten-UX und First Aid
+
+- [ ] Generische Schwellenprobe: Erfolg erscheint grün/positiv, Fehlschlag nicht als Kampf-Treffer.
+- [ ] Kampf, Magie und Matrix: Stage-Rail zeigt die richtige Reihenfolge sowie den aktiven und nächsten Schritt; übersprungene Stufen sind sichtbar.
+- [ ] Actor-Mutationen (Schaden, Entzug, Schwund, Heilung) sind optisch abgesetzt und werden erst nach dem jeweiligen Confirm-Klick angewendet.
+- [ ] First Aid: Heilmenge ist sichtbar; ohne Auswahl Körperlich/Betäubung darf „Heilung anwenden" keinen Schadensmonitor ändern.
+- [ ] GM-Korrektur bleibt für GM sichtbar, ist aber gegenüber normalen Flow-Aktionen dezent gewichtet.
+
 ## v2.3 — Rest (M4)
 
 - [ ] Fahrzeugprobe / Verfolgungsjagd: läuft über generischen Flow, Kontroll-Rig-Mods sichtbar

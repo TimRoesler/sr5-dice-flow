@@ -2,6 +2,19 @@
 
 All notable changes to SR5 Dice Flow are documented here. Versions follow the module's release schedule (see `docs/DEVELOPMENT-PLAN.md`).
 
+## v2.3.3 — Live-Chat-Karten und First Aid
+
+### Added
+
+- **Stage-Rail für Flow-Karten**: Kampf-, Magie-, Matrix-, Heilungs- und generische Flows zeigen erledigte, übersprungene, aktuelle und nächste Stufen; der aktive Schritt ist für Screenreader mit `aria-current="step"` ausgezeichnet.
+- **Klare Aktionshierarchie**: reguläre Würfel-/Flow-Aktionen, bestätigungspflichtige Actor-Mutationen und GM-Korrekturen sind visuell und strukturell getrennt.
+- **First Aid auf der Karte**: Heilmenge sowie Auswahl von Körperlich/Betäubung stehen direkt neben der expliziten Heilungsbestätigung.
+- **Neue Renderer-Regressionstests** für Verdict-Semantik, Stage-Rail, Action-Tiers und den Heilungs-Dialog.
+
+### Fixed
+
+- **Verdikt-Farben**: allgemeine Erfolge und Misserfolge verwenden nun eigene semantische Klassen; sie missbrauchen nicht mehr die rot kodierte Kampf-Trefferklasse.
+
 ## v2.3.2 — Chat-Karten-Feinschliff
 
 ### Changed
