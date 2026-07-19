@@ -123,8 +123,9 @@ noch nicht als eigene Stufe (läuft nativ) · Matrix-Ziele = Hosts/Geräte/IC (`
 
 | Bereich | GRW S. | Abdeckung | Status |
 |---|---|---|---|
-| Fahrzeugproben, Fahrzeugkampf | 199–205 | über `generic-*` (Rig-Mods aus pool.changes) | ✅ v2.3 |
-| Verfolgungsjagden | 203 f. | opposed + Advisory-Reichweitenband | ⬜ |
+| Fahrzeugproben, Fahrzeugkampf | 199–205 | `vehicle-pilot`-FlowSpec (`PilotVehicleTest`): Fahrzeugwerte-Karte, Ramm-Advisory (Schadensbänder, DK −6, Kontrollschwellen 2/3) | ✅ v2.5 |
+| Verfolgungsjagden | 203 f. | `vehicle-pilot`: vergleichende Fahrzeugprobe pro Ziel (Button), Nettoerfolge = mögliche Kategorienwechsel (max. Beschleunigung, advisory), Chase-Regelkarte | ✅ v2.5 |
+| Drohnen (Wahrnehmung/Infiltration) | 199 ff. | `drone-perception` / `drone-infiltration` (`DronePerceptionTest`/`DroneInfiltrationTest`) mit Fahrzeugwerte-Karte | ✅ v2.5 |
 | Erste Hilfe | 205–208 | `heal`-FlowSpec: Nettoerfolge über Schwelle 2, Monitor-Auswahl, dann Confirm-Button | ✅ v2.3.2 |
 | Medizin / Biotechnologie | 205–208 | kein direkter Heal-Flow (Medizin unterstützt nur Genesungsproben) | ➖ nativ |
 | Natürliche Heilung | 207 | Recovery-Tests über generic/extended | ✅ v2.3 |
