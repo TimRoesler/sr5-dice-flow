@@ -1,3 +1,7 @@
 export const EDGE_USES=['push-the-limit','second-chance','blitz','seize-initiative','close-call','dead-mans-trigger'] as const; export type EdgeUse=typeof EDGE_USES[number];
 export function allowedEdgeUses(context:{rolled?:boolean;initiative?:boolean;glitch?:boolean;incapacitated?:boolean}){const out:EdgeUse[]=[];if(!context.rolled)out.push('push-the-limit');if(context.rolled)out.push('second-chance');if(context.initiative)out.push('blitz','seize-initiative');if(context.glitch)out.push('close-call');if(context.incapacitated)out.push('dead-mans-trigger');return out}
 export async function spendEdge(actor:any,use:EdgeUse){const path=actor.system?.attributes?.edge?.uses?'system.attributes.edge.uses.value':'system.attributes.edge.value';const current=path.split('.').reduce((o,k)=>o?.[k],actor);if(!Number.isFinite(current)||current<1)throw new Error('Not enough Edge');await actor.update({[path]:current-1});return{before:current,after:current-1,use}}
+// A transaction is "fresh" while no follow-up rolls or confirmations exist and no edge was
+// spent on the origin — only then may the origin roll be re-executed with edge (post-hoc
+// Second Chance / Push the Limit via the system's own TestCreator re-execution).
+export function isFreshTransaction(tx:{origin:{edge?:unknown};branches:Record<string,{rolls:Record<string,unknown>;confirmations:Record<string,unknown>}>}){if(tx.origin.edge)return false;return Object.values(tx.branches).every(branch=>Object.keys(branch.rolls).length===0&&Object.keys(branch.confirmations).length===0)}

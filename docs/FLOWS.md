@@ -16,8 +16,8 @@ Handlungstypen: **F** Frei · **E** Einfach · **K** Komplex · **U** Unterbrech
 | Vergleichende Probe | 50 | `generic-opposed` | ✅ Basisflow ab M0; Katalogtitel M4 |
 | Ausgedehnte Probe | 50 | `extended`-FlowSpec + Fortschritts-Card | ✅ v2.3 |
 | Teamworkprobe | 51 (Kampf: 190) | System-eigene Teamwork-UI (nativ) | ➖ nativ |
-| Erfolge kaufen | 47 | Anzeige-Hinweis auf Karte | ⬜ M4 |
-| Zweiter Versuch / Patzer ausbügeln (Edge) | 51/48 | Edge-Anzeige (Reroll systemintern) | ✅ v2.3 (Anzeige) |
+| Erfolge kaufen | 47 | Hinweis-Zeile (Pool ÷ 4) auf einfachen Karten | ✅ v3.0 |
+| Zweiter Versuch / Patzer ausbügeln (Edge) | 51/48 | Karten-Buttons Second Chance / Push the Limit (nur frische Transaktionen; Re-Roll + Edge-Verbrauch laufen über die System-Re-Execution) | ✅ v3.0 |
 | Attributsproben (Erinnern, Heben/Tragen, Menschenkenntnis, Selbstbeherrschung) | 152–153 | `AttributeOnlyTest` → `generic-simple` | 🔶 Basisflow M0; Katalog M4 |
 | Wahrnehmung / Genau beobachten | 169–170 | `generic-*` + Katalog | 🔶 Basisflow M0; Katalog M4 |
 | Soziale Proben (Überreden, Einschüchtern, Verhandeln …) | 152 ff. | `generic-opposed` + Katalog-Titel | 🔶 Basisflow M0; Titel M4 |
@@ -74,17 +74,17 @@ Nur Katalog + Budget-Tracking, kein Würfelflow (➖), sofern oben nicht geliste
 | Zauber wirken (Wahrnehmung/Gesundheit/Illusion/Manipulation) | K | 284–294 | FlowSpec `spellcasting` (opposed/simple) + Drain | ✅ v2.1 |
 | Schnellzaubern | E | 167, 281 | wie Zauber wirken (`SpellCastingTest`) | ✅ v2.1 |
 | Entzugswiderstand (Drain) | — | 282 | `DrainTest` (self-Branch); `apply-drain`-Confirm | ✅ v2.1 (Hotfix v1.4.1) |
-| Zauberabwehr (Antimagie) | F | 294 | kein System-Flow → advisorische Pool-Zeile | ⬜ 👁 |
+| Zauberabwehr (Antimagie) | F | 294 | Advisory-Hinweis auf Kampfzauber-Karten (Antimagie-Würfel + Abschirmung) | ✅ v3.0 👁 |
 | Zauber bannen | K | 294 | `generic-opposed` (keine eigene Systemklasse) | ✅ v2.1 |
 | Ritualzauberei | — | 294–298 | FlowSpec `ritual` (SL würfelt Ritualprobe) → Drain | ✅ v2.1 |
 | Geist herbeirufen | K | 299 | FlowSpec `summoning` (SL würfelt Geist) → Dienste → Drain-Button | ✅ v2.1 |
 | Geist binden | — | 300 | `generic-opposed` (keine eigene Systemklasse) | ✅ v2.1 |
 | Geist verbannen | K | 300 | `generic-opposed` (keine eigene Systemklasse) | ✅ v2.1 |
 | Geisterdienste | — | 301 | Anzeige (Dienste = Nettoerfolge) | 👁 |
-| Alchemie (Aufbereitung) | — | 304 f. | opposed + Drain; Klasse verifizieren | ⬜ |
-| Adeptenkräfte (aktivierbare: Adrenalinschub …) | V | 308 ff. | meist `generic-*` + Katalog | ⬜ |
-| Astrale Wahrnehmung / Projektion | E/K | 312 f. | Katalog (➖) + `generic-*` für Askennen | ⬜ |
-| Astralkampf | K | 314 | `combat-attack`-Form mit Astral-Pools | ⬜ |
+| Alchemie (Aufbereitung) | — | 304 f. | `spellcasting`-Flow (Drain inkl.), Alchemie-Advisory (Potenz = Nettoerfolge, Verfall) auf der Karte | ✅ v3.0 |
+| Adeptenkräfte (aktivierbare: Adrenalinschub …) | V | 308 ff. | `item-use`-Flow + Enrichment-Effekte (sr5-chummer); passive Kräfte als ActiveEffects | ✅ v3.0 |
+| Astrale Wahrnehmung / Projektion | E/K | 312 f. | Katalog (➖) + `generic-*` für Askennen | ✅ v3.0 (generic) |
+| Astralkampf | K | 314 | `combat-attack` (System-Nahkampftest mit astralen Pools; WIL-Verteidigung wählt der SL im Dialog) | ✅ v3.0 (combat-attack) |
 
 ## Milestone 3 — Matrix (GRW Kap. „Die Matrix", S. 212–255; Handlungen S. 234–241)
 

@@ -278,5 +278,11 @@
 "SDF.Matrix.OverwatchIllegal": "Overwatch score rises by the defender's hits.",
 "SDF.Matrix.Note.dumpshock": "Dumped from VR without switching to AR first: dumpshock 6S (cold sim) or 6P (hot sim), resisted with WIL + Firewall; then −2 to all actions for (10 − WIL) minutes.",
 "SDF.Matrix.Note.databombSet": "Bomb rating ≤ net hits; detonation deals (rating)d6 matrix damage and deletes the file if set to. Choose a passcode!",
-"SDF.Matrix.Note.databombDisarm": "Against bomb rating × 2. Net hits disarm and delete the bomb; on a failure it detonates ((rating)d6 matrix damage)."
+"SDF.Matrix.Note.databombDisarm": "Against bomb rating × 2. Net hits disarm and delete the bomb; on a failure it detonates ((rating)d6 matrix damage).",
+"SDF.Edge.SecondChanceButton": "Second Chance (1 Edge)",
+"SDF.Edge.PushTheLimitButton": "Push the Limit (1 Edge)",
+"SDF.Error.EdgeNotFresh": "Edge re-roll is only available before any follow-up rolls or confirmations.",
+"SDF.BuyHits": "Alternative before rolling: buy hits — {hits} automatic hits ({pool} ÷ 4, core p. 47).",
+"SDF.Magic.AlchemyHint": "Alchemical preparation: creation is an opposed test against the force; potency = net hits, fades 1 per hour (core p. 304 ff.).",
+"SDF.Magic.CounterspellHint": "Counterspelling: defenders with assigned counterspelling dice add them to their defense test (shielding: +initiate grade, core p. 294)."
 }

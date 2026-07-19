@@ -278,5 +278,11 @@
 "SDF.Matrix.OverwatchIllegal": "Overwatch-Wert steigt um die Erfolge des Verteidigers.",
 "SDF.Matrix.Note.dumpshock": "Auswurf aus der VR ohne AR-Wechsel: Auswurfschock 6G (kaltes Sim) bzw. 6K (heißes Sim), Widerstand mit WIL + Firewall; danach −2 auf alle Handlungen für (10 − WIL) Minuten.",
 "SDF.Matrix.Note.databombSet": "Bombenstufe ≤ Nettoerfolge; Detonation verursacht (Stufe)W6 Matrixschaden und löscht die Datei, falls so eingestellt. Passwort festlegen!",
-"SDF.Matrix.Note.databombDisarm": "Gegen Bombenstufe × 2. Nettoerfolge entschärfen und löschen die Bombe; bei Misserfolg detoniert sie ((Stufe)W6 Matrixschaden)."
+"SDF.Matrix.Note.databombDisarm": "Gegen Bombenstufe × 2. Nettoerfolge entschärfen und löschen die Bombe; bei Misserfolg detoniert sie ((Stufe)W6 Matrixschaden).",
+"SDF.Edge.SecondChanceButton": "Second Chance (1 Edge)",
+"SDF.Edge.PushTheLimitButton": "Push the Limit (1 Edge)",
+"SDF.Error.EdgeNotFresh": "Edge-Wiederholung nur möglich, solange noch keine Folgeproben oder Bestätigungen erfolgt sind.",
+"SDF.BuyHits": "Alternativ vor dem Wurf: Erfolge kaufen — {hits} automatische Erfolge ({pool} ÷ 4, GRW S. 47).",
+"SDF.Magic.AlchemyHint": "Alchemistisches Erzeugnis: Herstellung als Vergleichende Probe gegen Kraftstufe; Potenz = Nettoerfolge, verliert 1 Potenz pro Stunde (GRW S. 304 ff.).",
+"SDF.Magic.CounterspellHint": "Zauberabwehr: Verteidiger mit zugeteilten Antimagie-Würfeln addieren diese zur Verteidigungsprobe (Abschirmung: zusätzlich +Initiatengrad, GRW S. 294)."
 }

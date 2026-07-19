@@ -1,0 +1,5 @@
+import{describe,expect,it}from'vitest';import{isFreshTransaction}from'../src/core/edge';import{createTransaction,addTarget}from'../src/core/transaction';
+describe('isFreshTransaction',()=>{
+ it('is fresh right after capture',()=>{let tx=createTransaction({kind:'SuccessTest',hits:3,modifiers:[]},'u');tx=addTarget(tx,0,'u',{id:'a',actorUuid:'Actor.a',name:'A'});expect(isFreshTransaction(tx)).toBe(true)});
+ it('is stale once a branch rolled or confirmed or edge was used',()=>{let tx=createTransaction({kind:'SuccessTest',hits:3,modifiers:[]},'u');tx=addTarget(tx,0,'u',{id:'a',actorUuid:'Actor.a',name:'A'});const rolled=structuredClone(tx);(rolled.branches.a as any).rolls.defense={id:'r',kind:'T',modifiers:[],createdAt:1};expect(isFreshTransaction(rolled)).toBe(false);const confirmed=structuredClone(tx);(confirmed.branches.a as any).confirmations.damageApplied={at:1,by:'u'};expect(isFreshTransaction(confirmed)).toBe(false);const edged=structuredClone(tx);(edged.origin as any).edge={secondChance:true};expect(isFreshTransaction(edged)).toBe(false)});
+});
