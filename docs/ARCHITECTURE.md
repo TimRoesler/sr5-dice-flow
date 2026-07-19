@@ -238,6 +238,37 @@ Waffen-UUID, führt `item.useAmmo(rounds)` erst nach Klick aus und speichert Vor
 in `ammoConfirmed`. Bei deaktiviertem Setting oder Wrapper-/Laufzeitfehler bleibt der
 Systemverbrauch aktiv und die Karte degradiert auf reine Anzeige.
 
+### Aufgeschobene Effekt-Anwendung (M5, v2.4)
+
+Das System wendet Item-ActiveEffects mit `applyTo:'targeted_actor'` bei Testerfolg automatisch
+auf Ziel-Actors an (`SuccessTestEffectsFlow.createTargetActorEffects`, aufgerufen aus
+`SuccessTest.afterSuccess` bei unopposed Tests bzw. `OpposedTest.afterFailure` beim gescheiterten
+Verteidiger; das Item des OpposedTest löst über `sourceItemUuid` auf das Angreifer-Item auf).
+Das World-Setting `deferEffects` (Standard an) schiebt das auf: zwei libWrapper-`MIXED`-Wraps
+(`src/foundry/effects.ts`) sammeln stattdessen die bereits dynamisch aufgelösten Effektdaten via
+`this.effects._collectTargetActorEffectsData()`, schreiben sie per Core-Mutation
+`setPendingEffects` als `stageData.effects` + `derived.pendingEffects` auf die passenden
+Branches (unopposed: Actor-UUID-Match über `this.targets`; opposed: Marker-`targetId` bzw.
+Verteidiger-Actor) und überspringen `wrapped()`. Beide Methoden sind in 0.36.x single-purpose;
+jeder Fehler, fehlende Transaktionen oder nur teilweise abgedeckte Ziele fallen auf `wrapped()`
+zurück — Effekte gehen nie still verloren. Die Anwendung passiert erst über die **globalen
+Confirmations** `effectsApplied`/`selfEffectsApplied` (`GLOBAL_CONFIRMATIONS` in
+`core/flows/confirmation.ts`, Kind `effect`): der Handler erzeugt aktivierte Kopien per
+`actor.createEmbeddedDocuments('ActiveEffect', …)` mit `system.appliedByTest=true`
+(targeted_actor) und `flags.sr5-dice-flow.appliedFrom`. Der Snapshot wird sanitisiert
+(`core/effects.ts`; behalten: name/img/changes/duration/statuses/system) und bei >32 KB auf
+Name-only reduziert (`oversized`) — dann sammelt der Handler beim Klick live vom Item nach
+(ohne dynamische Auflösung). Die Socket-Action `pendingEffects` verzichtet auf den optimistischen
+Revisions-Check (der vorausgehende `advance` läuft beim GM um), ist aber core-seitig gegen
+Doppel-Set geschützt und auf Author/GM/Branch-Owner beschränkt.
+
+Items **ohne Würfelprobe** (`hasRoll=false`, z. B. Drogen/Toxine) erzeugen über den
+`SR5_CastItemAction`-Hook (`src/foundry/itemuse.ts`) eine eigene Modul-Karte: Pseudo-Origin
+`ItemUseAction`, Ziel-Branches aus `game.user.targets`, Selbst-Branch, Pending-Effekte direkt aus
+den Item-Effekten (targeted_actor für Ziele; targeted_actor + deaktivierte `actor`-Effekte für
+den Selbst-Branch). Die System-Beschreibungskarte wird bewusst nicht unterdrückt, der Hook gibt
+nie `false` zurück (vetobar!).
+
 ### Migration & Kompatibilität
 
 - `migrate()` v1→v2 lazy in `store.getTransaction`: v1-`targets` → `target`-Branches
@@ -247,7 +278,7 @@ Systemverbrauch aktiv und die Karte degradiert auf reine Anzeige.
   generischen `run-stage`/`confirm`-Actions.
 - Socket-Protokoll bekommt ein Versionsfeld; Mixed-Version-Guard verweigert mit Meldung.
 
-## Ausgelieferte FlowSpecs (v2.0–v2.3)
+## Ausgelieferte FlowSpecs (v2.0–v2.4)
 
 Registrierungsreihenfolge (`src/core/flows/specs/index.ts`) — spezifische Specs vor Fallbacks;
 `match` nimmt den ersten Treffer:
@@ -265,14 +296,15 @@ Registrierungsreihenfolge (`src/core/flows/specs/index.ts`) — spezifische Spec
 | `overwatch-check` | `specs/matrix.ts` | CheckOverwatchScoreTest | Anzeige OS (👁), keine Stages | v2.2 |
 | `heal` | `specs/general.ts` | `action.skill` = `first_aid` | Patienten-Branch(es), Monitor-Auswahl (Körperlich/Geistig), `apply-heal`-Confirm für Nettoerfolge | v2.3.2 |
 | `extended` | `specs/general.ts` | `data.extended===true` (nicht opposed) | Fortschritts-Card (kumulative Hits vs. Schwelle) | v2.3 |
+| `item-use` | `specs/items.ts` | nicht-opposed Test, Item mit `targeted_actor`-Effekten | `targets+self`, keine Stages; Item-Section (Blast, aktive Effekte), globale Effekt-Confirms | v2.4 |
 | `generic-opposed` | `specs/generic.ts` | `data.opposed.test` vorhanden | Ziel-Stage `$origin.defenseTest`, `opposedHits` | v2.0 |
 | `generic-simple` | `specs/generic.ts` | Catch-all | keine Stages; Schwellen-Verdikt auf der Karte (v2.3) | v2.0 |
 
 **Reducer** (`reducers.ts` + Spec-Dateien): `merge`, `opposedHits`, `soakDamage`, `combatDefense`,
 `combatSoak`, `suppressionDamage`, `spellDefense`, `drainResist`, `summonServices`, `matrixDefense`,
-`fadeResist`. **Confirmation-Kinds:** `damage`, `ammo`, `drain`, `fade`, `heal`, `initiative`
+`fadeResist`. **Confirmation-Kinds:** `damage`, `ammo`, `drain`, `fade`, `heal`, `initiative`, `effect` (global)
 (je Handler in `foundry/actions.ts`). **Card-Sections/Extraktoren:** `combatOrigin`, `spellOrigin`,
-`matrixOrigin`, `overwatchOrigin`, `extendedProgress`.
+`matrixOrigin`, `overwatchOrigin`, `extendedProgress`, `itemUse`.
 
 **Weitere Foundry-Features:** Called-Shot-Dialog-Injektion (`foundry/calledshot.ts`,
 `renderTestDialog`-Hook, −4 Pool-Change + Tag), Aktionsökonomie-Tracking (`foundry/economy.ts` +

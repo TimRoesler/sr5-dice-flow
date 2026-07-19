@@ -2,6 +2,32 @@
 
 All notable changes to SR5 Dice Flow are documented here. Versions follow the module's release schedule (see `docs/DEVELOPMENT-PLAN.md`).
 
+## v2.4.0 — Item-Nutzung & Effekt-Anwendung (M5)
+
+### Added
+
+- **Aufgeschobene Item-Effekte** (`deferEffects`, Welt-Setting, Standard an): Zieleffekte von Items
+  (`applyTo: targeted_actor`) werden bei Testerfolg nicht mehr automatisch vom System angewendet,
+  sondern als ausstehende Effekte auf der Flow-Karte gesammelt und erst per Bestätigungs-Button
+  (`Effekte anwenden`) als ActiveEffects auf dem Ziel-Actor erzeugt. libWrapper-`MIXED` auf
+  `SuccessTest.afterSuccess` (unopposed) und `OpposedTest.afterFailure` (opposed); jeder Fehler
+  fällt auf das Systemverhalten zurück, Teilabdeckung der Ziele wird nie still verschluckt.
+- **FlowSpec `item-use`**: Nicht-vergleichende Proben, deren Item Zieleffekte trägt, bekommen einen
+  eigenen Flow (`targets+self`) mit Item-Card-Section (Icon, Blast-Radius/Dropoff, aktive Effekte).
+- **Items ohne Würfelprobe**: `SR5_CastItemAction`-Hook erzeugt für Items mit anwendbaren Effekten
+  (z. B. Drogen, Toxine) eine eigene Modul-Karte mit Zielen aus der aktuellen Zielauswahl,
+  Selbst-Branch und Effekt-Buttons; die System-Beschreibungskarte bleibt unangetastet.
+- **Selbstanwendung**: `Effekte auf sich anwenden` erzeugt aktivierte Kopien der Item-Effekte auf
+  dem eigenen Actor (targeted_actor-Kopien mit `appliedByTest`, deaktivierte `actor`-Effekte als
+  aktivierte Kopie); Item-Effekte selbst werden nie umgeschaltet, bereits aktive nur angezeigt.
+- **Blast-Anzeige im Kampf-Flow**: Granaten/Wurfwaffen mit Sprengwirkung zeigen Radius und
+  Dropoff in der Kampf-Origin-Section; Flashbang-artige Zieleffekte laufen pro Verteidiger über
+  die Opposed-Deferral-Schiene.
+- Neue Confirmation-Art `effect` mit globalen Confirmations (`effectsApplied`/`selfEffectsApplied`),
+  Core-Mutation `setPendingEffects` (Event `effects.pending`), Socket-Action `pendingEffects`
+  (revisionstolerant, Author/GM/Branch-Owner), Sanitizer mit 32-KB-Size-Guard (Fallback: Name-only
+  + Live-Re-Collect beim Anwenden). 20 neue Unit-Tests (insgesamt 180).
+
 ## v2.3.3 — Live-Chat-Karten und First Aid
 
 ### Added

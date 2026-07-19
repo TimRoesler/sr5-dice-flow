@@ -7,6 +7,7 @@ import {captureCombatBefore,cloneTestData,extractOrigin,rollRecord,testActorUuid
 import {attachTransaction,getTransaction,saveTransaction} from './store';
 import {requestId,socket} from './socket';
 import{installAmmoWrapper}from'./ammo';
+import{installEffectsWrappers}from'./effects';
 import{economyPayload,recordEconomyFromTest}from'./economy';
 
 export const flowMarker=(data:any)=>data?.sr5DiceFlow??data?.following?.sr5DiceFlow;
@@ -21,7 +22,7 @@ async function captureOrigin(test:any,record:ReturnType<typeof rollRecord>){cons
 export function shouldSuppressFollowupMessage(data:any,lookup=(id:string)=>game.messages?.get(id)){const testData=data?.flags?.shadowrun5e?.TestData?.data;const marker=flowMarker(testData);const previousId=marker?.messageId??testData?.previousMessageId;if(!previousId)return false;const stored=lookup(previousId)?.getFlag?.(MODULE_ID,'transaction') as any;if(!stored)return false;const tx=migrate(stored),input={testClass:testClass({data:testData}),actorUuid:testData?.actorUuid,targetId:marker?.targetId};if(canRouteFollowup(tx,input,flows))return true;return Boolean(tx.flowId==='combat-attack'&&marker?.targetId&&tx.branches[marker.targetId])}
 
 export function installWrappers(){
-    if(!globalThis.window?.libWrapper){console.warn(`${MODULE_ID} | libWrapper unavailable`);return}installAmmoWrapper();
+    if(!globalThis.window?.libWrapper){console.warn(`${MODULE_ID} | libWrapper unavailable`);return}installAmmoWrapper();installEffectsWrappers();
     const name='SuccessTest';
     if(!game.shadowrun5e?.tests?.[name]){console.warn(`${MODULE_ID} | SuccessTest registry entry unavailable`);return}
     if(game.shadowrun5e?.tests?.RangedAttackTest)try{window.libWrapper.register(MODULE_ID,'game.shadowrun5e.tests.RangedAttackTest.prototype.execute',async function(this:any,wrapped:(...args:any[])=>Promise<any>,...args:any[]){captureCombatBefore(this);return wrapped(...args)},'WRAPPER')}catch(error){console.warn(`${MODULE_ID} | Cannot snapshot ranged attack origin`,error)}

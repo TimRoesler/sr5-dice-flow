@@ -169,6 +169,25 @@ FlowSpecs: `spellcasting-combat`/`spellcasting-other` (erledigt via `spellcastin
 - ➖ **Teamwork**: Das System nutzt eine **eigene TeamworkTest-UI** (`sr5-teamwork-*`-Buttons, kein `SuccessTest.toMessage`-Durchlauf) → nativ belassen, keine Modul-Integration (würde die native UI verdrängen). Advisory-Provider-Idee verworfen als zu fragil.
 - ➖ **Natürliche Heilung** (NaturalRecovery-Tests): laufen als ausgedehnte/einfache Proben über die generic/extended-Anzeige.
 
+## Milestone 5 — Item-Nutzung & Effekt-Anwendung → v2.4
+
+**KOMPLETT (2026-07-19), 180 Unit-Tests grün.** Zieleffekte von Items (`applyTo:'targeted_actor'`)
+laufen als aufgeschobene, bestätigungspflichtige Anwendung durch alle Flows.
+
+| # | Arbeitspaket | Dateien | Status |
+|---|---|---|---|
+| M5.1 | Core: ConfirmationKind `effect`, globale Confirmations (`effectsApplied`/`selfEffectsApplied`), `setPendingEffects`, Sanitizer + 32-KB-Size-Guard | `src/core/flows/spec.ts`, `src/core/flows/confirmation.ts`, `src/core/transaction.ts`, `src/core/effects.ts` | ✅ erledigt (2026-07-19) |
+| M5.2 | Deferral-Wraps (MIXED auf `SuccessTest.afterSuccess` + `OpposedTest.afterFailure`), Setting `deferEffects` (default an), Fallback auf Systemverhalten bei Fehlern/Teilabdeckung | `src/foundry/effects.ts`, `src/main.ts`, `src/foundry/integration.ts` | ✅ erledigt (2026-07-19) |
+| M5.3 | FlowSpec `item-use` (`targets+self`, Item mit Zieleffekten, nicht-opposed) + `itemUse`-Extraktor/Card-Section (Blast, aktive Effekte) | `src/core/flows/specs/items.ts`, `src/foundry/itemuse.ts` | ✅ erledigt (2026-07-19) |
+| M5.4 | No-Roll-Pfad: `SR5_CastItemAction`-Hook → Modul-Karte mit Ziel-/Selbst-Branches und Pending-Effekten (Drogen/Toxine); System-Beschreibungskarte bleibt | `src/foundry/itemuse.ts` | ✅ erledigt (2026-07-19) |
+| M5.5 | `applyEffects`-Handler (Kind `effect`): Kopien via `createEmbeddedDocuments` mit `appliedByTest`, Selbstanwendung aktiviert deaktivierte `actor`-Effekte als Kopie; Socket-Action `pendingEffects` (revisionstolerant, Author/GM/Branch-Owner) | `src/foundry/actions.ts`, `src/foundry/security.ts`, `src/main.ts` | ✅ erledigt (2026-07-19) |
+| M5.6 | Blast-Anzeige im Kampf-Flow, Effekt-Zeilen/Buttons auf der generischen Karte, i18n de+en, Unit-Tests (effects-flow/effects-wrap/item-use + Erweiterungen) | `src/foundry/card.ts`, `src/foundry/combat.ts`, `lang/*`, `tests/` | ✅ erledigt (2026-07-19) |
+
+Abweichungen/Notizen: `deferEffects` aus → reines Systemverhalten (keine Anzeige-Zeile);
+Effekt-Anwendung erweitert die Leitplanke 3 (Mutation nur per Bestätigungs-Button) auf
+ActiveEffects; dynamische Change-Werte werden beim Deferral aufgelöst gesnapshottet, bei
+No-Roll-Items/oversized erst beim Anwenden roh vom Item gelesen.
+
 ## Querschnitt (gilt für jeden Milestone)
 
 - **i18n**: alle neuen Strings de+en (`SDF.*`); Katalog-Labels referenzieren `SR5.*` wo vorhanden.
@@ -176,7 +195,7 @@ FlowSpecs: `spellcasting-combat`/`spellcasting-other` (erledigt via `spellcastin
   (Status-Spalten abhaken), README, CHANGELOG.
 - **Kompatibilität**: v1-Karten funktionieren weiter (Action-Aliase), Socket-Protokollversion
   mit Mixed-Version-Guard, lazy Schema-Migration.
-- **Releases**: v1.4.1 (Hotfix) → v2.0 (M0+M1) → v2.1 (Magie) → v2.2 (Matrix) → v2.3 (Rest).
+- **Releases**: v1.4.1 (Hotfix) → v2.0 (M0+M1) → v2.1 (Magie) → v2.2 (Matrix) → v2.3 (Rest) → v2.4 (Items & Effekte).
   Pro Release: implementieren → `npm run validate` → committen → pushen → deployen →
   Maintainer benachrichtigen mit TESTING.md-Checkliste.
 
@@ -197,4 +216,5 @@ FlowSpecs: `spellcasting-combat`/`spellcasting-other` (erledigt via `spellcastin
 | Overwatch/Marken/Geistererschaffung mutiert das System selbst | Modul dort nur Anzeige; als Abweichung dokumentiert |
 | Binden/Verbannen-Testklassen, Heil-API unverifiziert | bei M2-/M4-Start gegen `game.shadowrun5e.tests` / `SR5Actor` prüfen |
 | Edge-Re-Roll invalidiert nachgelagerte Stages | eigene Engine-Funktion `reroll()` mit Invalidation-Events, ausführliche Unit-Tests |
+| `afterSuccess`/`afterFailure` bekommen künftig mehr Logik → MIXED-Skip verlöre sie | Skip nur bei erfolgreichem Defer; try/catch → `wrapped()`; in 0.36.x verifiziert single-purpose |
 | Mixed-Version-Tische (Modul alt/neu) | Socket-Protokollversion, Guard verweigert + benachrichtigt |

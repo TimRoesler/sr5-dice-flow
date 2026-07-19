@@ -1,5 +1,5 @@
 import type{Branch,RollRecord}from'../../types';
-export type StageBranch='perTarget'|'self';export type StageTrigger='button'|'systemFollowup'|'systemOpposed';export type StageOutcome='success'|'failure';export type ConfirmationKind='damage'|'drain'|'ammo'|'marks'|'initiative'|'fade'|'heal';
+export type StageBranch='perTarget'|'self';export type StageTrigger='button'|'systemFollowup'|'systemOpposed';export type StageOutcome='success'|'failure';export type ConfirmationKind='damage'|'drain'|'ammo'|'marks'|'initiative'|'fade'|'heal'|'effect';
 export interface StageTransition {onSuccess?:string;onFailure?:string;always?:string}
 export interface StageConfirmation {id:string;kind:ConfirmationKind;when:string}
 export interface StageSpec {id:string;branch:StageBranch;testClasses:string[];trigger:StageTrigger;reduce:string;next:StageTransition;confirm?:StageConfirmation[];defenseOptions?:boolean;action?:string;gm?:boolean}

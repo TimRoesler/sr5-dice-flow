@@ -12,7 +12,7 @@ Ziel des laufenden Ausbaus: **alle** Spieler-Aktionen des SR5-Grundregelwerks (s
 
 ## Arbeitsworkflow (verbindlich)
 
-1. Implementieren im geklonten Repo (`/home/foundryvtt/sr5-dice-flow` auf dem Server)
+1. Implementieren im geklonten Repo (`/home/foundryvtt/20_DEVELOPMENT/sr5-dice-flow` auf dem Server)
 2. `npm run validate` muss grün sein (Typecheck + Vitest + Build)
 3. Committen und pushen (`main`)
 4. Build nach `/home/foundryvtt/data/Data/modules/sr5-dice-flow/` deployen (dist/, lang/, styles/, module.json, docs/)
@@ -45,7 +45,8 @@ Keine Kommentare außer für nicht offensichtliche Regel-/API-Constraints. Alle 
 
 | Pfad | Inhalt |
 |---|---|
-| `/home/foundryvtt/sr5-dice-flow` | dieses Repo (Quelle der Wahrheit) |
+| `/home/foundryvtt/20_DEVELOPMENT/sr5-dice-flow` | dieses Repo (Quelle der Wahrheit) |
+| `/home/foundryvtt/20_DEVELOPMENT/shadowrun5e` | System-Fork mit vollständigen TS-Quellen (direkt lesbar, schneller als die Sourcemap) |
 | `/home/foundryvtt/data/Data/modules/sr5-dice-flow` | installiertes Modul (nur Build-Output; wird überschrieben) |
 | `/home/foundryvtt/data/Data/systems/shadowrun5e` | Spielsystem (nur `dist/`-Bundle) |
 | `/home/foundryvtt/data/Data/systems/shadowrun5e/dist/bundle.js.map` | **enthält die kompletten TS-Quellen des Systems** in `sourcesContent` |

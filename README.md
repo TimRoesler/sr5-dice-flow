@@ -11,6 +11,9 @@ führt sie als revisionierte Transaktion durch komplette Regel-Flows.
 - Mehrzielfähig: mehrere Ziele je Angriff in einer Transaktion
 - Live-Chat-Karten mit Bestätigungs-Buttons; Aktor-/Weltdaten werden nie still verändert
 - Deckt Nahkampf, Fernkampf, Magie und Matrix sowie weitere Kernregel-Aktionen ab
+- Item-Nutzung mit Effekt-Anwendung: Zieleffekte von Items (Granaten, Toxine, Medkits, Drogen)
+  landen als ausstehende Effekte auf der Karte und werden erst per Bestätigungs-Button auf
+  Ziel- oder eigene Tokens angewendet — auch für Items ohne Würfelprobe
 
 ## Installation
 
@@ -29,7 +32,7 @@ Voraussetzungen: das System **Shadowrun 5th Edition** sowie die Module **sr5-chu
 |---|---|
 | Foundry VTT | v14 (verifiziert: 14.364) |
 | Spielsystem | shadowrun5e |
-| Modulversion | 2.3.1 |
+| Modulversion | 2.4.0 |
 
 ## Entwicklung
 

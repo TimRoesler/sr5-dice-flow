@@ -33,7 +33,7 @@ Handlungstypen: **F** Frei · **E** Einfach · **K** Komplex · **U** Unterbrech
 | Vollautomatisch (AM) | K | 168, 179 | Feuermodus-Extraktion | ✅ v2.0 |
 | Sperrfeuer | K | 179 ff. | FlowSpec `suppression` (`SuppressionDefenseTest`) | ✅ v2.0 |
 | Nahkampfangriff | K | 168, 184 ff. | `MeleeAttackTest` (+ `data.reach`) | ✅ v2-Grundflow + Reach-Anzeige |
-| Wurfangriff (Werfen) | E | 168, 181 ff. | `ThrownAttackTest` | ✅ v2-Grundflow |
+| Wurfangriff (Werfen) | E | 168, 181 ff. | `ThrownAttackTest` + Blast-Anzeige, Zieleffekte per Deferral | ✅ v2.4 |
 | Pfeil abschießen | E | 167 | `RangedAttackTest` (Bogen) | ✅ v2-Grundflow |
 | Mehrfachangriffe | F | 166, 196 | Advisory Pool-Split-Warnbox | ✅ v2.0 |
 | Gezielte Schüsse (Called Shots) | — | 195 | **Modul-Eigenleistung** (Dialog-Injektion −4 + Fallback-Toggle) | ✅ v2.0 |
@@ -132,8 +132,9 @@ noch nicht als eigene Stufe (läuft nativ) · Matrix-Ziele = Hosts/Geräte/IC (`
 | Ausgedehnte Proben (Karte mit Fortschritt) | 50 | `extended`-FlowSpec | ✅ v2.3 |
 | Teamwork | 51 | System-eigene UI (nativ) | ➖ nativ |
 | Edge-Aktionen (Push the Limit, Second Chance, Blitz, Seize the Initiative, Close Call, Dead Man's Trigger) | 58 f. | System testintern; Modul: Rendering + `reroll()`-Invalidation; `src/core/edge.ts` existiert | 🔶 |
-| Abhängigkeits-/Entzugsproben (Drogen) | 416 f. | `generic-simple` + Katalog | ⬜ |
+| Abhängigkeits-/Entzugsproben (Drogen) | 416 f. | `generic-simple` + Katalog; Drogen-Einnahme = Item-Nutzung mit Selbst-Effekten (`item-use`) | 🔶 v2.4 |
 | Ausrüstung verbergen/bemerken | 421 f. | `generic-opposed` | ⬜ |
+| Item-Nutzung mit Zieleffekten (Granaten, Toxine, Medkits, Gadgets) | — | div. | FlowSpec `item-use` + Effekt-Deferral in allen Flows; `SR5_CastItemAction` für Items ohne Wurf | ✅ v2.4 |
 
 ## Ausdrücklich außerhalb des Umfangs
 

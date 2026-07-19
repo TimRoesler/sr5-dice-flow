@@ -111,6 +111,30 @@ mit Kampfzauber, Decker mit Cyberdeck.
 - [ ] Volle Matrixabwehr als Interrupt im Ökonomie-Tracker
 - [ ] ⚠ Bekannte Lücke: Biofeedback-Folge (Heiß-Sim) ist noch nicht als eigene Stufe integriert; läuft nativ als Systemnachricht
 
+## v2.4 — Items & Effekte (M5)
+
+Voraussetzung: Setting **„Item-Effekte aufschieben"** aktiv (Standard); Test-Items mit
+ActiveEffects `applyTo: Zielakteur` (z. B. Flashbang-Granate) bzw. deaktivierten
+`applyTo: Akteur`-Effekten (z. B. Kampfdroge).
+
+- [ ] **Granate/Wurfwaffe auf 2 Ziele**: Wurfangriff mit Zieleffekten auf zwei markierte Ziele;
+      Kampf-Card zeigt Blast (Radius/Dropoff). Ziel A verteidigt erfolgreich → keine Effekte,
+      kein Button. Ziel B scheitert → „Ausstehende Effekte: …" + Button „Effekte anwenden";
+      Klick erzeugt die ActiveEffects auf Ziel B (Actor-Sheet prüfen), Karte zeigt
+      „Effekte angewendet", Button verschwindet, zweiter Klick unmöglich.
+- [ ] **Unopposed Item-Probe** (Item mit Zieleffekten, Aktion ohne Gegenprobe, Ziel markiert):
+      `item-use`-Karte mit Item-Section; Effekte ausstehend → Button → angewendet.
+- [ ] **Item ohne Wurf** (Droge, nur Beschreibung): Item-Karte des Systems erscheint normal,
+      zusätzlich Modul-Karte mit Selbst-Branch; „Effekte auf sich anwenden" erzeugt aktivierte
+      Kopien auf dem eigenen Actor; bereits aktive Effekte nur als Hinweis.
+- [ ] **Medkit/Erste Hilfe mit Zieleffekten**: läuft weiter über den `heal`-Flow; Effekt-Button
+      erscheint zusätzlich (globale Confirmation), Heilung + Effekte unabhängig bestätigbar.
+- [ ] **Fremdes Ziel als Spieler**: Spieler ohne Ownership sieht den Button, Anwendung verweigert
+      mit Hinweis; GM oder Besitzer kann anwenden.
+- [ ] **Setting aus**: Systemverhalten unverändert (Effekte sofort angewendet, System-Chat-Karte
+      der Effekte erscheint), kein Modul-Button.
+- [ ] **Reload**: ausstehende Effekte überleben F5 (stehen im Message-Flag) und bleiben anwendbar.
+
 ## v2.3.3 — Karten-UX und First Aid
 
 - [ ] Generische Schwellenprobe: Erfolg erscheint grün/positiv, Fehlschlag nicht als Kampf-Treffer.
