@@ -265,5 +265,18 @@
 "SDF.Vehicle.RamControl": "Nach dem Rammen Fahrzeugprobe zur Kontrolle: Rammer Schwelle {rammer}, Gerammter Schwelle {rammed}.",
 "SDF.Vehicle.ChaseTitle": "Verfolgungsjagd (GRW S. 204)",
 "SDF.Vehicle.ChaseHint": "Aufholen/Abhängen: Fahrzeugfertigkeit + REA [Geschw. oder Handling] (Manöverschwelle); jeder Erfolg verschiebt 1 Gefechtsentfernung, maximal Beschleunigung ({accel}). Alle Verfolgungshandlungen sind Komplexe Handlungen.",
-"SDF.Vehicle.TerrainHint": "Geländeschwellen: Offen 0 · Normal +1 · Schwierig +2 · Unwegsam +4. Schneiden (kurz): Sieger zwingt Ziel zu Unfall-Vermeidungsprobe (Schwelle = Nettoerfolge)."
+"SDF.Vehicle.TerrainHint": "Geländeschwellen: Offen 0 · Normal +1 · Schwierig +2 · Unwegsam +4. Schneiden (kurz): Sieger zwingt Ziel zu Unfall-Vermeidungsprobe (Schwelle = Nettoerfolge).",
+"SDF.Matrix.RequiredMarks": "Benötigte Marken",
+"SDF.Matrix.MarksOwner": "Besitzer",
+"SDF.Matrix.MarksSpecial": "speziell (s. Beschreibung)",
+"SDF.Matrix.Legality": "Legalität",
+"SDF.Matrix.Legal": "Legale Handlung",
+"SDF.Matrix.Illegal.attack": "Illegal (Angriffshandlung)",
+"SDF.Matrix.Illegal.sleaze": "Illegal (Schleicherhandlung)",
+"SDF.Matrix.FailNote.attack": "Bei Misserfolg: 1 Kästchen unwiderstehbarer Matrixschaden pro Nettoerfolg des Ziels.",
+"SDF.Matrix.FailNote.sleaze": "Bei Misserfolg: Das Ziel platziert eine Marke auf dem Angreifer und alarmiert Besitzer/IC.",
+"SDF.Matrix.OverwatchIllegal": "Overwatch-Wert steigt um die Erfolge des Verteidigers.",
+"SDF.Matrix.Note.dumpshock": "Auswurf aus der VR ohne AR-Wechsel: Auswurfschock 6G (kaltes Sim) bzw. 6K (heißes Sim), Widerstand mit WIL + Firewall; danach −2 auf alle Handlungen für (10 − WIL) Minuten.",
+"SDF.Matrix.Note.databombSet": "Bombenstufe ≤ Nettoerfolge; Detonation verursacht (Stufe)W6 Matrixschaden und löscht die Datei, falls so eingestellt. Passwort festlegen!",
+"SDF.Matrix.Note.databombDisarm": "Gegen Bombenstufe × 2. Nettoerfolge entschärfen und löschen die Bombe; bei Misserfolg detoniert sie ((Stufe)W6 Matrixschaden)."
 }

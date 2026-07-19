@@ -94,21 +94,21 @@ Nur Katalog + Budget-Tracking, kein Würfelflow (➖), sofern oben nicht geliste
 
 | Aktion | Typ | GRW S. | Status | | Aktion | Typ | GRW S. | Status |
 |---|---|---|---|---|---|---|---|---|
-| Ausstöpseln | E | 234 | ⬜ | | Marke einladen | E | 238 | 👁 v2.2 (System platziert) |
-| Befehl vortäuschen | K | 234 | ⬜ | | Marke löschen | K | 238 | ⬜ |
-| Brute Force | K | 234 | ✅ v2.2 (`matrix`) | | Matrixsignatur löschen | K | 238 | ⬜ |
-| Datei cracken | K | 235 | ⬜ | | Matrixsuche | V | 238 | ✅ v2.3 (`extended`) |
-| Datei editieren | K | 235 | ⬜ | | Matrixwahrnehmung | K | 239 | ⬜ |
-| Datenbombe entschärfen | K | 235 | ⬜ | | Nachricht übermitteln | E | 239 | ➖ |
-| Datenbombe legen | K | 236 | ⬜ | | Overwatch-Wert bestimmen | E | 239 | ✅ v2.2 👁 |
-| Datenspike | K | 236 | ✅ v2.2 (`matrix`) | | Programm abstürzen lassen | K | 239 | ⬜ |
-| Eiliges Hacken | K | 236 | ✅ v2.2 (`matrix`) | | Signal stören | K | 239 | ⬜ |
-| Gerät formatieren | K | 236 | ⬜ | | Übertragung abfangen | K | 241 | ⬜ |
-| Gerät neu starten | K | 236 | ⬜ | | Verstecken | K | 241 | ⬜ |
-| Gerät steuern | V | 237 | ⬜ | | Volle Matrixabwehr | U | 241 | 🔶 v2.2 (`MatrixDefenseTest`) |
-| Gitterwechsel | K | 237 | ⬜ | | Icon aufspüren | K | 237 | ⬜ |
-| Host betreten/verlassen | K | 237 | ⬜ | | Icon verändern | E | 237 | ➖ |
-| In ein Gerät springen | K | 238 | ⬜ | | Interfacemodus wechseln | E | 237 | ➖ |
+| Ausstöpseln | E | 234 | ✅ v2.6 (`matrix` + Aktions-Advisory) | | Marke einladen | E | 238 | 👁 v2.2 (System platziert) |
+| Befehl vortäuschen | K | 234 | ✅ v2.6 (`matrix` + Aktions-Advisory) | | Marke löschen | K | 238 | ✅ v2.6 (`matrix` + Aktions-Advisory) |
+| Brute Force | K | 234 | ✅ v2.2 (`matrix`) | | Matrixsignatur löschen | K | 238 | ✅ v2.6 (`matrix` + Aktions-Advisory) |
+| Datei cracken | K | 235 | ✅ v2.6 (`matrix` + Aktions-Advisory) | | Matrixsuche | V | 238 | ✅ v2.3 (`extended`) |
+| Datei editieren | K | 235 | ✅ v2.6 (`matrix` + Aktions-Advisory) | | Matrixwahrnehmung | K | 239 | ✅ v2.6 (`matrix` + Aktions-Advisory) |
+| Datenbombe entschärfen | K | 235 | ✅ v2.6 (`matrix` + Aktions-Advisory) | | Nachricht übermitteln | E | 239 | ➖ |
+| Datenbombe legen | K | 236 | ✅ v2.6 (`matrix` + Aktions-Advisory) | | Overwatch-Wert bestimmen | E | 239 | ✅ v2.2 👁 |
+| Datenspike | K | 236 | ✅ v2.2 (`matrix`) | | Programm abstürzen lassen | K | 239 | ✅ v2.6 (`matrix` + Aktions-Advisory) |
+| Eiliges Hacken | K | 236 | ✅ v2.2 (`matrix`) | | Signal stören | K | 239 | ✅ v2.6 (`matrix` + Aktions-Advisory) |
+| Gerät formatieren | K | 236 | ✅ v2.6 (`matrix` + Aktions-Advisory) | | Übertragung abfangen | K | 241 | ✅ v2.6 (`matrix` + Aktions-Advisory) |
+| Gerät neu starten | K | 236 | ✅ v2.6 (`matrix` + Aktions-Advisory) | | Verstecken | K | 241 | ✅ v2.6 (`matrix` + Aktions-Advisory) |
+| Gerät steuern | V | 237 | ✅ v2.6 (`matrix` + Aktions-Advisory) | | Volle Matrixabwehr | U | 241 | 🔶 v2.2 (`MatrixDefenseTest`) |
+| Gitterwechsel | K | 237 | ✅ v2.6 (`matrix` + Aktions-Advisory) | | Icon aufspüren | K | 237 | ✅ v2.6 (`matrix` + Aktions-Advisory) |
+| Host betreten/verlassen | K | 237 | ✅ v2.6 (`matrix` + Aktions-Advisory) | | Icon verändern | E | 237 | ➖ |
+| In ein Gerät springen | K | 238 | ✅ v2.6 (`matrix` + Aktions-Advisory) | | Interfacemodus wechseln | E | 237 | ➖ |
 
 Technomancer (S. 249–255): Komplexe Form weben (`complex-form` → self:Fade) ✅ v2.2 ·
 Schwundwiderstand (Fading, `apply-fade`-Confirm) ✅ v2.2 · Sprite kompilieren

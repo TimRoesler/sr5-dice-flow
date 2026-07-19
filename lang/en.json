@@ -265,5 +265,18 @@
 "SDF.Vehicle.RamControl": "After a ram, vehicle test to keep control: rammer threshold {rammer}, rammed threshold {rammed}.",
 "SDF.Vehicle.ChaseTitle": "Chase rules (core p. 204)",
 "SDF.Vehicle.ChaseHint": "Catch up/break away: vehicle skill + REA [speed or handling] (maneuver threshold); each hit shifts 1 range category, up to acceleration ({accel}). All chase actions are complex actions.",
-"SDF.Vehicle.TerrainHint": "Terrain thresholds: open 0 · normal +1 · restricted +2 · tight +4. Cut off (short): winner forces a crash-avoidance test (threshold = net hits)."
+"SDF.Vehicle.TerrainHint": "Terrain thresholds: open 0 · normal +1 · restricted +2 · tight +4. Cut off (short): winner forces a crash-avoidance test (threshold = net hits).",
+"SDF.Matrix.RequiredMarks": "Required marks",
+"SDF.Matrix.MarksOwner": "Owner",
+"SDF.Matrix.MarksSpecial": "special (see description)",
+"SDF.Matrix.Legality": "Legality",
+"SDF.Matrix.Legal": "Legal action",
+"SDF.Matrix.Illegal.attack": "Illegal (attack action)",
+"SDF.Matrix.Illegal.sleaze": "Illegal (sleaze action)",
+"SDF.Matrix.FailNote.attack": "On a failure: 1 box of unresisted matrix damage per defender net hit.",
+"SDF.Matrix.FailNote.sleaze": "On a failure: the target places a mark on the attacker and alerts its owner/IC.",
+"SDF.Matrix.OverwatchIllegal": "Overwatch score rises by the defender's hits.",
+"SDF.Matrix.Note.dumpshock": "Dumped from VR without switching to AR first: dumpshock 6S (cold sim) or 6P (hot sim), resisted with WIL + Firewall; then −2 to all actions for (10 − WIL) minutes.",
+"SDF.Matrix.Note.databombSet": "Bomb rating ≤ net hits; detonation deals (rating)d6 matrix damage and deletes the file if set to. Choose a passcode!",
+"SDF.Matrix.Note.databombDisarm": "Against bomb rating × 2. Net hits disarm and delete the bomb; on a failure it detonates ((rating)d6 matrix damage)."
 }

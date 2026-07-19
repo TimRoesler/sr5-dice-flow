@@ -1,0 +1,8 @@
+import{describe,expect,it}from'vitest';import{isIllegalAction,MATRIX_ACTIONS,matrixActionInfo}from'../src/core/matrix-actions';import{matrix}from'../src/core/flows/specs/matrix';
+describe('matrix action catalog',()=>{
+ it('covers all 29 core-rulebook actions with unique keys',()=>{expect(MATRIX_ACTIONS.length).toBe(29);expect(new Set(MATRIX_ACTIONS.map(info=>info.key)).size).toBe(29)});
+ it('resolves actions by english and german names case-insensitively',()=>{expect(matrixActionInfo('Data Spike')?.key).toBe('dataSpike');expect(matrixActionInfo('datenspike')?.key).toBe('dataSpike');expect(matrixActionInfo('Verstecken')?.key).toBe('hide');expect(matrixActionInfo('Unbekannt')).toBeUndefined();expect(matrixActionInfo(undefined)).toBeUndefined()});
+ it('flags attack and sleaze actions as illegal (GRW p. 231)',()=>{expect(isIllegalAction(matrixActionInfo('Brute Force'))).toBe(true);expect(isIllegalAction(matrixActionInfo('Hack on the Fly'))).toBe(true);expect(isIllegalAction(matrixActionInfo('Edit File'))).toBe(false);expect(isIllegalAction(matrixActionInfo('Jack Out'))).toBe(false)});
+ it('carries GRW mark requirements',()=>{expect(matrixActionInfo('Format Device')?.marks).toBe(3);expect(matrixActionInfo('Trace Icon')?.marks).toBe(2);expect(matrixActionInfo('Jam Signals')?.marks).toBe('owner');expect(matrixActionInfo('Erase Mark')?.marks).toBe('special')});
+ it('matches matrix-category actions even without a matrix test class',()=>{expect(matrix.match({testClass:'SuccessTest',data:{action:{categories:['matrix']},opposed:{test:'OpposedMatrixTest'}}})).toBe(true);expect(matrix.match({testClass:'SuccessTest',data:{action:{categories:['social']}}})).toBe(false);expect(matrix.match({testClass:'MatrixTest',data:{}})).toBe(true)});
+});
