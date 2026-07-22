@@ -1,5 +1,18 @@
-.sr5-dice-flow .sdf-combat-origin{display:grid;grid-template-columns:repeat(auto-fit,minmax(9.5rem,1fr));gap:.3rem}.sr5-dice-flow .sdf-combat-group{padding:.2rem .4rem;border:1px solid var(--sr5-theme-border);border-radius:5px}.sr5-dice-flow .sdf-combat-group>.metric-row{display:flex;justify-content:space-between;gap:.3rem;padding:.05rem 0}.sr5-dice-flow .sdf-combat-group .value-result{text-align:right;font-weight:700}.sr5-dice-flow .sdf-combat-group summary{padding:0 0 .15rem}
+/* SR5 Dice Flow — Kampf-spezifische Karten-Ergänzungen (Nova-Look).
+   Origin-Group/Badge werden in sr5-dice-flow.css gestylt; hier nur, was
+   dort nicht vorkommt: die Multi-Angriff-Warnung und aufklappbare Pool-Gruppen. */
 
-.sdf-combat-advisory{margin:.25rem 0;padding:.25rem .4rem;border:1px solid color-mix(in srgb,var(--sr5-theme-label) 55%,transparent);border-radius:6px;background:color-mix(in srgb,var(--sr5-theme-label) 14%,transparent)}.sdf-combat-advisory strong{color:var(--sr5-theme-label)}.sdf-combat-advisory p{margin:.15rem 0 0;font-size:var(--font-size-11);color:var(--sr5-theme-text-secondary)}
+.sr5-dice-flow .sdf-combat-advisory {
+    grid-column: 1 / -1;
+    margin: 0;
+    padding: .28rem .45rem;
+    border: 1px solid #9a5a24;
+    border-left: 2px solid var(--deck-orange, #ff9d3d);
+    border-radius: 2px;
+    background: linear-gradient(90deg, #ff9d3d14, transparent);
+}
+.sr5-dice-flow .sdf-combat-advisory strong { color: var(--deck-orange, #ff9d3d); font-family: var(--deck-display, monospace); font-size: .66rem; letter-spacing: .06em; text-transform: uppercase; }
+.sr5-dice-flow .sdf-combat-advisory p { margin: .15rem 0 0; color: var(--deck-ink, #d8eceb); font-size: .68rem; line-height: 1.35; }
 
-.sdf-called-shot-badge{margin:.25rem .4rem;padding:.2rem .4rem;border:1px solid color-mix(in srgb,var(--sr5-theme-label) 55%,transparent);border-radius:6px;background:color-mix(in srgb,var(--sr5-theme-label) 14%,transparent);color:var(--sr5-theme-label);font-weight:700;text-align:center}.sdf-called-shot-group strong{color:var(--sr5-theme-label)}
+.sr5-dice-flow details.sdf-combat-group { background: #081014; }
+.sr5-dice-flow details.sdf-combat-group summary { padding: 0 0 .1rem; border: 0; }

@@ -10,6 +10,29 @@ Setup-Voraussetzungen: Welt mit System `shadowrun5e` ≥ 0.36.1.1, Module `sr5-d
 mindestens zwei Test-Charaktere mit Fernkampfwaffe (SM/AM-fähig), Nahkampfwaffe, Zauberer
 mit Kampfzauber, Decker mit Cyberdeck.
 
+## v3.1.0 — Nova-Optik (Chat-Karten & Würfelfenster)
+
+Rein optisch; keine Regelmechanik betroffen. Bei Fehlern greift überall der Fallback auf die
+System-/Vorgängerdarstellung (Konsole beobachten: keine `sr5-dice-flow | Dialog skin failed`).
+
+- [ ] Beliebige Probe (z. B. Wahrnehmung) würfeln → Chat-Karte erscheint im Nova-Look:
+      dunkles Panel, abgeschrägte Ecke, Cyan-Titel in Orbitron, große Lime-Trefferzahl (Hero)
+- [ ] Fonts laden (Orbitron/Rajdhani) — Titel/Werte nicht in Systemschrift; Netzwerk-Tab zeigt
+      `modules/sr5-dice-flow/fonts/*.woff2` als geladen
+- [ ] Probe **mit Glitch/Patzer** → Hero färbt sich orange, Glitch-Indikator sichtbar
+- [ ] Angriff auf 1–2 Ziele → Ziel-Panels, Stage-Rail (aktueller/nächster Schritt farblich),
+      Verdict-Pille (Treffer rot / abgewehrt cyan), Buttons: Flow=cyan, Commit=rot, GM=gestrichelt
+- [ ] Modifikatoren- und Historie-Abschnitte auf-/zuklappbar, gedämpfte Optik
+- [ ] Kampf-/Matrix-/Extended-Origin-Sections (Feuermodus, Munition, Marken, Fortschrittsbalken)
+      im gleichen Panel-Stil, Balken mit Cyan→Lime-Verlauf
+- [ ] **Ohne** installiertes `sr5-nova-sheet`: Karten sehen identisch aus (Eigenständigkeit)
+- [ ] Light-Mode des Systems aktiv: Karten bleiben lesbar (fest dunkles Deck)
+- [ ] Initiales Würfelfenster (Angriff/Skill): Nova-Look mit Konsolen-Kopfzeile, Würfelcode-Display,
+      editierbare Pool/Limit/Schwelle-Felder (Lime), Modify-Roll-Sektion, Roll-Mode-Buttons,
+      Würfeln (grün) / Abbrechen (rot)
+- [ ] Gezielter-Schuss-Selektor (Fernkampf) weiterhin funktional und im Nova-Stil eingefärbt
+- [ ] Regression: Würfeln/Abbrechen/Werte-Ändern/Breakdown-Aufklappen im Dialog funktionieren wie zuvor
+
 ## Hotfix v1.4.1 (M0.2)
 
 - [ ] Kampfzauber wirken (SpellCastingTest) → Entzugswurf erscheint im Chat (wird **nicht**

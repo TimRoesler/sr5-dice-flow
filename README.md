@@ -32,7 +32,7 @@ Voraussetzungen: das System **Shadowrun 5th Edition** sowie die Module **sr5-chu
 |---|---|
 | Foundry VTT | v14 (verifiziert: 14.364) |
 | Spielsystem | shadowrun5e |
-| Modulversion | 2.4.0 |
+| Modulversion | 3.1.0 |
 
 ## Entwicklung
 

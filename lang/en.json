@@ -39,6 +39,7 @@
 "SDF.UnknownTarget": "Unknown target",
 "SDF.NoTargets": "No targets. The test remains valid.",
 "SDF.Revision": "Revision {revision}",
+"SDF.Dialog.Console": "Dice console",
 "SDF.Stage.created": "Awaiting defense",
 "SDF.Stage.defending": "Defense in progress",
 "SDF.Stage.defended": "Awaiting resistance",

@@ -2,6 +2,33 @@
 
 All notable changes to SR5 Dice Flow are documented here. Versions follow the module's release schedule (see `docs/DEVELOPMENT-PLAN.md`).
 
+## v3.1.0 — Nova-Optik für Chat-Karten & Würfelfenster
+
+### Changed
+
+- **Chat-Karten im Nova-Cyberdeck-Look**: Die Live-Karten übernehmen die Optik des
+  `sr5-nova-sheet` (Deck-Palette Cyan/Lime/Orange/Rot, Orbitron-/Rajdhani-Fonts, abgeschrägte
+  Panel-Ecken via `clip-path`, dezentes Scanline-Raster, Neon-Akzente). Die System-Theme-Tokens
+  (`--sr5-theme-*`) werden nur **innerhalb** der Karte umgefärbt — kein Eingriff ins System oder
+  in andere Module. Die Fonts sind lokal gebündelt, die Karten sehen also auch ohne installiertes
+  Nova-Sheet korrekt aus.
+- **Klarere Informationshierarchie**: Die Trefferzahl der Ursprungsprobe steht jetzt als großer
+  Hero-Wert im Vordergrund; Pool/Limit/Schwelle/Rohtreffer sind kompakt daneben gruppiert.
+  Glitzer erscheinen als eigener Indikator am Hero statt als beiläufige Metrik-Zeile.
+  Revision, Modifikator-Breakdown und Historie bleiben bewusst zurückhaltend (gedämpft bzw.
+  einklappbar). Ziel-Panels, Stage-Rail, Verdicts und die Aktions-Tiers (Flow/Commit/GM) wurden
+  auf denselben Look gezogen.
+- **Initiales Würfelfenster (System-`TestDialog`) neu geskinnt**: Beim Rendern wird per Hook die
+  Klasse `sdf-nova-dialog` gesetzt und eine kompakte Konsolen-Kopfzeile eingespielt; Würfelcode,
+  editierbare Werte, Modify-Roll-Sektion, Roll-Mode-Umschalter, der eingespielte Gezielte-Schuss-
+  Selektor sowie Würfeln/Abbrechen erhalten den Nova-Look. Rein optisch, keine Logikänderung am
+  System.
+
+### Notes
+
+- Neue Style-Datei `styles/sr5-dice-flow-dialog.css` und lokales `fonts/`-Verzeichnis
+  (Orbitron/Rajdhani, OFL) sind Teil des Deployments.
+
 ## v2.4.0 — Item-Nutzung & Effekt-Anwendung (M5)
 
 ### Added

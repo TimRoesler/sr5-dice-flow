@@ -39,6 +39,7 @@
 "SDF.UnknownTarget": "Unbekanntes Ziel",
 "SDF.NoTargets": "Keine Ziele. Die Probe bleibt gültig.",
 "SDF.Revision": "Revision {revision}",
+"SDF.Dialog.Console": "Würfelkonsole",
 "SDF.Stage.created": "Verteidigung ausstehend",
 "SDF.Stage.defending": "Verteidigung läuft",
 "SDF.Stage.defended": "Widerstand ausstehend",
