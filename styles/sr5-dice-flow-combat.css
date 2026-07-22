@@ -14,5 +14,10 @@
 .sr5-dice-flow .sdf-combat-advisory strong { color: var(--deck-orange, #ff9d3d); font-family: var(--deck-display, monospace); font-size: .66rem; letter-spacing: .06em; text-transform: uppercase; }
 .sr5-dice-flow .sdf-combat-advisory p { margin: .15rem 0 0; color: var(--deck-ink, #d8eceb); font-size: .68rem; line-height: 1.35; }
 
+.sr5-dice-flow .sdf-advisory { margin: .2rem 0 0; color: var(--deck-ink, #d8eceb); font-size: .68rem; line-height: 1.35; }
+.sr5-dice-flow .sdf-advisory i { color: var(--deck-orange, #ff9d3d); margin-right: .25rem; }
+.sr5-dice-flow .sdf-advisory small { color: var(--deck-muted, #7fa6a3); font-size: .62rem; }
+.sr5-dice-flow .sdf-advisory-origin .sdf-combat-group strong { color: var(--deck-cyan, #35e0e0); }
+
 .sr5-dice-flow details.sdf-combat-group { background: #081014; }
 .sr5-dice-flow details.sdf-combat-group summary { padding: 0 0 .1rem; border: 0; }

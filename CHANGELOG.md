@@ -2,6 +2,38 @@
 
 All notable changes to SR5 Dice Flow are documented here. Versions follow the module's release schedule (see `docs/DEVELOPMENT-PLAN.md`).
 
+## v3.2.0 — GRW-Rest-Lücken, Regel-Hinweise & Contract-Härtung (M11)
+
+### Added
+
+- **Regel-Hinweise auf generischen Karten** (`src/core/rule-advisories.ts`, advisory-only): Proben,
+  die über die generischen Flows laufen, zeigen jetzt einen kurzen GRW-Hinweis mit Seitenverweis —
+  **Ausrüstung verbergen/bemerken** (Skill „Fingerfertigkeit", GRW S. 421), **Abhängigkeits-/
+  Entzugsproben** (Name-Keyword, GRW S. 416) und **Unterbrechungshandlungen** mit ihren
+  Initiative-Kosten (GRW S. 165). Reine Anzeige, keine Mutation.
+- **Volle Matrixabwehr**: der Matrix-Aktionskatalog zeigt jetzt den Ini-Kosten-Hinweis
+  (Unterbrechung, −10 Initiative, +Willenskraft) auf der Karte.
+- **Fahrzeug-Hinweis bei Pool 0**: die `vehicle-pilot`-Karte weist darauf hin, wenn der
+  Manövrieren-/Ausweichen-Pool 0 ist (fehlende Boden/Luft/Wasser-Einordnung aus dem Import).
+
+### Changed
+
+- **Abhängigkeit von `sr5-chummer` auf ≥ 0.7.0 angehoben** (`module.json`): erst ab dieser Version
+  liefert der Import die ActiveEffect-Anreicherung, auf die die Item-Effekt-Anwendung (v2.4) baut.
+
+### Docs
+
+- **Wahrheitsstand hergestellt**: CHANGELOG-Einträge **v2.5.0 / v2.6.0 / v3.0.0** nachgetragen;
+  `docs/DEVELOPMENT-PLAN.md` um Milestones **M6–M10** ergänzt; Edge-Reroll in `FLOWS.md` und Plan
+  von „nicht umgesetzt" auf **✅ v3.0** korrigiert; `docs/TESTING.md` um Fahrzeug-/Matrix-/Edge-
+  Checklisten erweitert.
+
+### Notes
+
+- Die dazugehörige chummer-Korrektur (Kampfzauber Direkt/Indirekt aus dem Import) liegt in
+  sr5-chummer ≥ v1.0.7 (`system.combat.type`), damit die Schadenswiderstands-Verzweigung indirekter
+  Kampfzauber auch für Zauber ohne Kompendiumstreffer stimmt.
+
 ## v3.1.0 — Nova-Optik für Chat-Karten & Würfelfenster
 
 ### Changed
@@ -28,6 +60,50 @@ All notable changes to SR5 Dice Flow are documented here. Versions follow the mo
 
 - Neue Style-Datei `styles/sr5-dice-flow-dialog.css` und lokales `fonts/`-Verzeichnis
   (Orbitron/Rajdhani, OFL) sind Teil des Deployments.
+
+## v3.0.0 — Edge, Zauberabwehr & Erfolge kaufen (M10)
+
+### Added
+
+- **Edge auf der Karte**: Buttons **Second Chance** und **Push the Limit** erscheinen, solange die
+  Transaktion frisch ist (keine Folgeproben/Bestätigungen, kein Edge verbraucht). Re-Roll und
+  Edge-Abzug laufen vollständig über die System-Re-Execution
+  (`TestCreator.fromMessage` → `executeWith…`); das Modul mutiert nichts selbst
+  (`isFreshTransaction`/`spendEdge` in `src/core/edge.ts`). Auf einer Karte mit Folgeproben sind
+  die Buttons ausgeblendet, ein Klick auf alten Karten meldet den Frische-Hinweis.
+- **Zauberabwehr-Advisory** auf Kampfzauber-Karten (Antimagie-Würfel + Abschirmung, GRW S. 294) —
+  reine Anzeige, kein eigener Flow.
+- **Alchemie**: aufbereitete Zauber laufen über den `spellcasting`-Flow (inkl. Entzug); die Karte
+  zeigt einen Potenz-/Verfalls-Hinweis (Potenz = Nettoerfolge).
+- **Erfolge kaufen**: einfache Karten zeigen die Zeile „Erfolge kaufen — X (Pool ÷ 4)" (GRW S. 47).
+
+## v2.6.0 — Matrix-Aktionskatalog (M9)
+
+### Added
+
+- **Vollständiger GRW-Matrix-Aktionskatalog** (`src/core/matrix-actions.ts`): alle 29
+  Matrixhandlungen mit benötigten Marken, Limit und Legalität (illegal = Angriffs- bzw.
+  Schleicherhandlung, GRW S. 231); Lookup über deutsche und englische Aktionsnamen.
+- **Angereicherte `matrixOrigin`-Karte**: zeigt pro Aktion benötigte Marken, Legalität,
+  Misserfolgs-Konsequenz (Angriff: unwiderstehbarer Matrixschaden; Schleicher: Marke + Alarm),
+  Overwatch-Hinweis sowie Spezialnotizen für Ausstöpseln/Auswurfschock und Datenbomben
+  (legen/entschärfen).
+- Der `matrix`-Flow matcht jetzt zusätzlich `action.categories` `matrix`, wodurch auch
+  `SuccessTest`-basierte Aktionen wie „Datenbombe legen" über die Matrix-Karte laufen.
+
+## v2.5.0 — Fahrzeuge, Verfolgungsjagden & Drohnen (M6/M8)
+
+### Added
+
+- **Fahrzeug-Flow** (`vehicle-pilot`, `PilotVehicleTest`): Fahrzeugwerte-Karte (Handling/Speed inkl.
+  Offroad, Beschleunigung, Rumpf, Panzerung, Pilot, Sensor, Steuerungsmodus).
+- **Verfolgungsjagden**: vergleichende Fahrzeugprobe pro Ziel (Button); Nettoerfolge = mögliche
+  Kategorienwechsel (advisory, begrenzt durch max. Beschleunigung), plus Chase-Regelkarte.
+- **Ramm-Advisory** nach GRW: Chase-Rammschaden (Rumpf + Nettoerfolge / halber eigener Rumpf),
+  Rammschadensbänder nach Geschwindigkeit, DK −6, Kontrollproben-Schwellen 2/3, Gelände-/
+  Schneiden-Hinweise. Reine Regel-Helfer `ramDamage`/`chaseRamDamage` mit Vitest-Specs.
+- **Drohnen**: `drone-perception`/`drone-infiltration`-FlowSpecs
+  (`DronePerceptionTest`/`DroneInfiltrationTest`) mit Fahrzeugwerte-Karte.
 
 ## v2.4.0 — Item-Nutzung & Effekt-Anwendung (M5)
 

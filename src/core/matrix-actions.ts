@@ -4,7 +4,7 @@
 // on a failed sleaze action the target places a mark and alerts its owner. Advisory only.
 export type MatrixMarks=number|'owner'|'special';
 export type MatrixLimit='attack'|'sleaze'|'data_processing'|'firewall'|'none';
-export interface MatrixActionInfo {key:string;names:string[];marks:MatrixMarks;limit:MatrixLimit;note?:'dumpshock'|'databombSet'|'databombDisarm'}
+export interface MatrixActionInfo {key:string;names:string[];marks:MatrixMarks;limit:MatrixLimit;note?:'dumpshock'|'databombSet'|'databombDisarm'|'fullDefense'}
 const action=(key:string,names:string[],marks:MatrixMarks,limit:MatrixLimit,note?:MatrixActionInfo['note']):MatrixActionInfo=>({key,names:names.map(name=>name.toLowerCase()),marks,limit,note});
 export const MATRIX_ACTIONS:MatrixActionInfo[]=[
  action('bruteForce',['Brute Force'],0,'attack'),
@@ -20,7 +20,7 @@ export const MATRIX_ACTIONS:MatrixActionInfo[]=[
  action('eraseMark',['Erase Mark','Marke löschen'],'special','attack'),
  action('eraseSignature',['Erase Matrix Signature','Matrixsignatur löschen'],0,'attack'),
  action('formatDevice',['Format Device','Gerät formatieren'],3,'sleaze'),
- action('fullDefense',['Full Matrix Defense','Volle Matrixabwehr'],0,'none'),
+ action('fullDefense',['Full Matrix Defense','Volle Matrixabwehr'],0,'none','fullDefense'),
  action('gridHop',['Grid Hop','Gitterwechsel'],0,'none'),
  action('hackOnTheFly',['Hack on the Fly','Eiliges Hacken'],0,'sleaze'),
  action('hide',['Hide','Verstecken'],0,'sleaze'),

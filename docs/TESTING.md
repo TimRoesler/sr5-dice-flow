@@ -158,6 +158,42 @@ ActiveEffects `applyTo: Zielakteur` (z. B. Flashbang-Granate) bzw. deaktivierten
       der Effekte erscheint), kein Modul-Button.
 - [ ] **Reload**: ausstehende Effekte überleben F5 (stehen im Message-Flag) und bleiben anwendbar.
 
+## v3.0 — Edge & Magie-Rest (M10)
+
+- [ ] Beliebige frische Probe → unten Buttons **„Second Chance (1 Edge)"** und
+      **„Push the Limit (1 Edge)"**. Second Chance klicken: Wurf wird über das System wiederholt,
+      Edge am Actor sinkt um 1, Karte zeigt den Edge-Einsatz.
+- [ ] Nach einer **Folgeprobe** (z. B. Verteidigung eines Angriffs) sind die Edge-Buttons weg;
+      Klick auf einer alten Karte meldet „nur solange keine Folgeproben …".
+- [ ] Kampfzauber wirken → Karte zeigt den **Zauberabwehr-Hinweis** (Antimagie/Abschirmung).
+- [ ] Einfache Probe mit Pool ≥ 4 → Zeile **„Erfolge kaufen — X (Pool ÷ 4)"**.
+- [ ] Alchemistischer Zauber (Chummer-Import mit Alchemie-Erzeugnis) → **Alchemie-Hinweis**
+      (Potenz/Verfall) auf der Karte.
+
+## v2.6 — Matrix-Aktionskatalog (M9)
+
+Decker/Technomancer, Matrix-Aktionen aus dem Kompendium `sr5e-matrix-actions` würfeln:
+
+- [ ] **Datenspike**: Karte zeigt „Benötigte Marken: 0 · Illegal (Angriffshandlung)" +
+      Misserfolgs- und Overwatch-Hinweis.
+- [ ] **Eiliges Hacken**: „Illegal (Schleicherhandlung)" mit Marken-/Alarm-Hinweis.
+- [ ] **Datei editieren**: „Benötigte Marken: 1 · Legale Handlung".
+- [ ] **Ausstöpseln**: Auswurfschock-Hinweis (6G kalt / 6K heiß, −2 für 10−WIL Minuten).
+- [ ] **Datenbombe legen/entschärfen**: Stufen-/Detonations-Hinweise; „Legen" läuft trotz
+      SuccessTest-Klasse über die Matrix-Karte.
+- [ ] Stichprobe: Gerät formatieren (3 Marken), Icon aufspüren (2 Marken).
+
+## v2.5 — Fahrzeuge, Verfolgungsjagd & Drohnen (M6/M8)
+
+- [ ] Fahrzeug-Actor, Fahren/Pilot-Probe → dice-flow-Karte mit Fahrzeugwerte-Block +
+      aufklappbaren Abschnitten **„Rammen"** (Schadensbänder, DK −6, Kontrollschwellen 2/3) und
+      **„Verfolgungsjagd"** (Aufholen/Abhängen, Geländeschwellen).
+- [ ] **Verfolgung**: gegnerisches Fahrzeug-Token anvisieren → Button „Gegnerische Fahrzeugprobe"
+      → Gegner würfelt → Nettoerfolge + „Kategorienwechsel möglich".
+- [ ] **Drohne**: DronePerception-/DroneInfiltration-Test → eigene Karte mit Fahrzeugwerten.
+- [ ] ⚠ Bekannte Datenlücke: Manövrieren/Ausweichen-Pilotpool kann 0 sein (Chummer-Export ohne
+      Boden/Luft/Wasser-Einordnung) — Hinweis auf der Karte bzw. Fertigkeit am Fahrzeug nachtragen.
+
 ## v2.3.3 — Karten-UX und First Aid
 
 - [ ] Generische Schwellenprobe: Erfolg erscheint grün/positiv, Fehlschlag nicht als Kampf-Treffer.

@@ -285,5 +285,13 @@
 "SDF.Error.EdgeNotFresh": "Edge-Wiederholung nur möglich, solange noch keine Folgeproben oder Bestätigungen erfolgt sind.",
 "SDF.BuyHits": "Alternativ vor dem Wurf: Erfolge kaufen — {hits} automatische Erfolge ({pool} ÷ 4, GRW S. 47).",
 "SDF.Magic.AlchemyHint": "Alchemistisches Erzeugnis: Herstellung als Vergleichende Probe gegen Kraftstufe; Potenz = Nettoerfolge, verliert 1 Potenz pro Stunde (GRW S. 304 ff.).",
-"SDF.Magic.CounterspellHint": "Zauberabwehr: Verteidiger mit zugeteilten Antimagie-Würfeln addieren diese zur Verteidigungsprobe (Abschirmung: zusätzlich +Initiatengrad, GRW S. 294)."
+"SDF.Magic.CounterspellHint": "Zauberabwehr: Verteidiger mit zugeteilten Antimagie-Würfeln addieren diese zur Verteidigungsprobe (Abschirmung: zusätzlich +Initiatengrad, GRW S. 294).",
+"SDF.Vehicle.NoPilotSkillHint": "Pilot-/Manöver-Pool 0 — beim Import fehlt die Boden/Luft/Wasser-Einordnung des Fahrzeugs; passende Fahrzeugfertigkeit ggf. am Fahrzeugbogen nachtragen.",
+"SDF.Advisory.Label": "Regel-Hinweis",
+"SDF.Advisory.Page": "GRW S.",
+"SDF.Advisory.Initiative": "Initiative",
+"SDF.Advisory.conceal": "Verbergen/Bemerken: Ausrüstung verstecken ist eine vergleichende Probe (Fingerfertigkeit bzw. Verkleidung) gegen die Wahrnehmung des Gegenübers.",
+"SDF.Advisory.addiction": "Abhängigkeit/Entzug: Widerstand mit Konstitution + Willenskraft gegen die Suchtschwelle; ein Misserfolg steigert die Abhängigkeitsstufe.",
+"SDF.Advisory.interrupt": "Unterbrechungshandlung: kostet Initiative im laufenden Durchgang.",
+"SDF.Matrix.Note.fullDefense": "Volle Matrixabwehr: Unterbrechung, kostet 10 Initiative; fügt bis zur nächsten Handlung Willenskraft zu allen Matrixverteidigungen hinzu."
 }

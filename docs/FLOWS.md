@@ -38,7 +38,7 @@ Handlungstypen: **F** Frei · **E** Einfach · **K** Komplex · **U** Unterbrech
 | Mehrfachangriffe | F | 166, 196 | Advisory Pool-Split-Warnbox | ✅ v2.0 |
 | Gezielte Schüsse (Called Shots) | — | 195 | **Modul-Eigenleistung** (Dialog-Injektion −4 + Fallback-Toggle) | ✅ v2.0 |
 | Verteidigung: Normal / Ausweichen / Blocken / Parieren / Volle Abwehr | U | 165, 172, 189 ff. | Buttons pro Ziel, `data.activeDefense`, Ini-Kosten-Confirm | ✅ v2.0 |
-| Abfangen | U | 165, 194 | Aktionsökonomie-Katalog (Interrupt) | 🔶 v2.0 (Ökonomie) |
+| Abfangen | U | 165, 194 | Aktionsökonomie-Katalog (Interrupt) + Ini-Kosten-Regel-Hinweis auf generischen Interrupt-Karten (`rule-advisories.ts`) | ✅ v3.2 👁 (Ökonomie + Advisory) |
 | In Deckung gehen / Volle Deckung | E/U | 167, 190 | `data.cover` Pre-Seeding (Deckungs-Select) | ✅ v2.0 |
 | Schadenswiderstand (Soak) | — | 169 ff. | `PhysicalResistTest` | ✅ v2-FlowSpec |
 | Schaden anwenden (Bestätigungs-Button) | — | 169 ff. | `actor.addDamage` | ✅ v2-Confirm |
@@ -105,7 +105,7 @@ Nur Katalog + Budget-Tracking, kein Würfelflow (➖), sofern oben nicht geliste
 | Eiliges Hacken | K | 236 | ✅ v2.2 (`matrix`) | | Signal stören | K | 239 | ✅ v2.6 (`matrix` + Aktions-Advisory) |
 | Gerät formatieren | K | 236 | ✅ v2.6 (`matrix` + Aktions-Advisory) | | Übertragung abfangen | K | 241 | ✅ v2.6 (`matrix` + Aktions-Advisory) |
 | Gerät neu starten | K | 236 | ✅ v2.6 (`matrix` + Aktions-Advisory) | | Verstecken | K | 241 | ✅ v2.6 (`matrix` + Aktions-Advisory) |
-| Gerät steuern | V | 237 | ✅ v2.6 (`matrix` + Aktions-Advisory) | | Volle Matrixabwehr | U | 241 | 🔶 v2.2 (`MatrixDefenseTest`) |
+| Gerät steuern | V | 237 | ✅ v2.6 (`matrix` + Aktions-Advisory) | | Volle Matrixabwehr | U | 241 | ✅ v3.2 (`MatrixDefenseTest` + Ini-Kosten-Advisory im Katalog) |
 | Gitterwechsel | K | 237 | ✅ v2.6 (`matrix` + Aktions-Advisory) | | Icon aufspüren | K | 237 | ✅ v2.6 (`matrix` + Aktions-Advisory) |
 | Host betreten/verlassen | K | 237 | ✅ v2.6 (`matrix` + Aktions-Advisory) | | Icon verändern | E | 237 | ➖ |
 | In ein Gerät springen | K | 238 | ✅ v2.6 (`matrix` + Aktions-Advisory) | | Interfacemodus wechseln | E | 237 | ➖ |
@@ -132,9 +132,9 @@ noch nicht als eigene Stufe (läuft nativ) · Matrix-Ziele = Hosts/Geräte/IC (`
 | Magische Heilung (Heilzauber) | 288 | über FlowSpec `spellcasting` abgedeckt | ✅ v2.1 |
 | Ausgedehnte Proben (Karte mit Fortschritt) | 50 | `extended`-FlowSpec | ✅ v2.3 |
 | Teamwork | 51 | System-eigene UI (nativ) | ➖ nativ |
-| Edge-Aktionen (Push the Limit, Second Chance, Blitz, Seize the Initiative, Close Call, Dead Man's Trigger) | 58 f. | System testintern; Modul: Rendering + `reroll()`-Invalidation; `src/core/edge.ts` existiert | 🔶 |
-| Abhängigkeits-/Entzugsproben (Drogen) | 416 f. | `generic-simple` + Katalog; Drogen-Einnahme = Item-Nutzung mit Selbst-Effekten (`item-use`) | 🔶 v2.4 |
-| Ausrüstung verbergen/bemerken | 421 f. | `generic-opposed` | ⬜ |
+| Edge-Aktionen (Push the Limit, Second Chance, Blitz, Seize the Initiative, Close Call, Dead Man's Trigger) | 58 f. | Karten-Buttons Second Chance / Push the Limit auf frischen Transaktionen (`isFreshTransaction`/`spendEdge`, `src/core/edge.ts`); Re-Roll + Edge-Abzug über System-Re-Execution. Übrige Edge-Boosts (Blitz/Initiative/Close Call/Dead Man's Trigger) laufen systemintern → Anzeige | ✅ v3.0 |
+| Abhängigkeits-/Entzugsproben (Drogen) | 416 f. | `generic-simple` + Regel-Hinweis (Name-Keyword, `rule-advisories.ts`); Drogen-Einnahme = Item-Nutzung mit Selbst-Effekten (`item-use`) | ✅ v3.2 👁 |
+| Ausrüstung verbergen/bemerken | 421 f. | `generic-opposed` + Regel-Hinweis (Skill `palming`, `src/core/rule-advisories.ts`) | ✅ v3.2 👁 |
 | Item-Nutzung mit Zieleffekten (Granaten, Toxine, Medkits, Gadgets) | — | div. | FlowSpec `item-use` + Effekt-Deferral in allen Flows; `SR5_CastItemAction` für Items ohne Wurf | ✅ v2.4 |
 
 ## Ausdrücklich außerhalb des Umfangs

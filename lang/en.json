@@ -285,5 +285,13 @@
 "SDF.Error.EdgeNotFresh": "Edge re-roll is only available before any follow-up rolls or confirmations.",
 "SDF.BuyHits": "Alternative before rolling: buy hits — {hits} automatic hits ({pool} ÷ 4, core p. 47).",
 "SDF.Magic.AlchemyHint": "Alchemical preparation: creation is an opposed test against the force; potency = net hits, fades 1 per hour (core p. 304 ff.).",
-"SDF.Magic.CounterspellHint": "Counterspelling: defenders with assigned counterspelling dice add them to their defense test (shielding: +initiate grade, core p. 294)."
+"SDF.Magic.CounterspellHint": "Counterspelling: defenders with assigned counterspelling dice add them to their defense test (shielding: +initiate grade, core p. 294).",
+"SDF.Vehicle.NoPilotSkillHint": "Pilot/maneuver pool 0 — the import lacks the vehicle's ground/air/water class; add the matching vehicle skill on the vehicle sheet if needed.",
+"SDF.Advisory.Label": "Rule hint",
+"SDF.Advisory.Page": "Core p.",
+"SDF.Advisory.Initiative": "Initiative",
+"SDF.Advisory.conceal": "Conceal/notice: hiding gear is an opposed test (Palming or Disguise) against the other side's Perception.",
+"SDF.Advisory.addiction": "Addiction/withdrawal: resist with Body + Willpower against the addiction threshold; a failure raises the addiction stage.",
+"SDF.Advisory.interrupt": "Interrupt action: costs initiative in the current pass.",
+"SDF.Matrix.Note.fullDefense": "Full Matrix Defense: interrupt, costs 10 initiative; adds Willpower to all Matrix defenses until your next action."
 }

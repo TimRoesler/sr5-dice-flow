@@ -1,6 +1,9 @@
 # Entwicklungsplan: sr5-dice-flow → vollständige Abdeckung des SR5-Grundregelwerks
 
-Stand: 2026-07-12 · Basis: Modul v1.4.0, System `shadowrun5e` 0.36.1.5, Foundry v14
+Stand: 2026-07-22 · Modul v3.1.0 (Roadmap M0–M10 abgeschlossen), System `shadowrun5e` 0.36.x, Foundry v14
+Historischer Ausgangspunkt dieses Plans: Modul v1.4.0. M0–M5 unten sind das ursprüngliche
+Kern-Roadmap-Dokument; M6–M10 (Fahrzeuge, Chargen-Bezug, Rigger, Matrix-Katalog, Edge/Magie-Rest)
+sind weiter unten nachgetragen.
 
 ## Kontext & Ziel
 
@@ -164,7 +167,8 @@ FlowSpecs: `spellcasting-combat`/`spellcasting-other` (erledigt via `spellcastin
 
 - ✅ **Ausgedehnte Proben** (`extended`-FlowSpec): matcht `data.extended===true` (nicht opposed). `values.extendedHits` ist bereits kumulativ → keine eigene Akkumulation nötig; jede Iteration zeigt Fortschritt. Card-Section `extendedProgress` (Extractor `extendedProgressExtractor`): kumulative Erfolge / Schwelle + Fortschrittsbalken + „Schwelle erreicht". Iterations-Unterdrückung bewusst nicht umgesetzt (fragil, da Iterationen unabhängige Nachrichten ohne `previousMessageId` sind).
 - ✅ **Erste Hilfe** (`heal`-FlowSpec): matcht ausschließlich `action.skill === 'first_aid'`; Ziel-Branch(es) = Patient(en); Monitor-Auswahl (Körperlich/Geistig) und „Heilung anwenden"-Button für Nettoerfolge über der Schwelle — nur per Bestätigung. Medizin/Biotechnologie bleiben generische Proben, da Medizin nur Genesungsproben unterstützt.
-- ✅ **Edge-Anzeige**: `data.pushTheLimit`/`data.secondChance` → RollRecord-Feld `edge`; Karte zeigt „Edge eingesetzt: Grenzen überschreiten / Zweiter Versuch". Reroll (`reroll()`-Engine) **bewusst nicht** umgesetzt (riskantester Teil; System handhabt Push-the-Limit/Second-Chance ohnehin testintern → nur Anzeige, wie im Plan als Option vorgesehen).
+- ✅ **Edge-Anzeige**: `data.pushTheLimit`/`data.secondChance` → RollRecord-Feld `edge`; Karte zeigt „Edge eingesetzt: Grenzen überschreiten / Zweiter Versuch".
+- ✅ **Edge-Reroll (v3.0.0, M10)**: Karten-Buttons Second Chance / Push the Limit auf frischen Transaktionen (`isFreshTransaction`/`spendEdge` in `src/core/edge.ts`). Re-Roll und Edge-Abzug laufen über die System-Re-Execution (`TestCreator.fromMessage`) — das Modul mutiert nichts selbst. Eine eigene `reroll()`-Engine mit Stage-Invalidation wurde bewusst nicht gebaut (zu riskant); stattdessen nur frische Transaktionen zulassen.
 - ✅ **Soziales/Wahrnehmung/Allgemein/Fahrzeuge**: laufen über `generic-simple`/`generic-opposed`; neu: **Schwellen-Verdikt** auf der Karte (Erfolg/Misserfolg bei `hits>=threshold`, nur für Nicht-Ziel-Flows). PilotVehicleTest/Drohnen-Tests → generic (Kontroll-Rig-Mods kommen aus `pool.changes`, werden angezeigt).
 - ➖ **Teamwork**: Das System nutzt eine **eigene TeamworkTest-UI** (`sr5-teamwork-*`-Buttons, kein `SuccessTest.toMessage`-Durchlauf) → nativ belassen, keine Modul-Integration (würde die native UI verdrängen). Advisory-Provider-Idee verworfen als zu fragil.
 - ➖ **Natürliche Heilung** (NaturalRecovery-Tests): laufen als ausgedehnte/einfache Proben über die generic/extended-Anzeige.
@@ -187,6 +191,64 @@ Abweichungen/Notizen: `deferEffects` aus → reines Systemverhalten (keine Anzei
 Effekt-Anwendung erweitert die Leitplanke 3 (Mutation nur per Bestätigungs-Button) auf
 ActiveEffects; dynamische Change-Werte werden beim Deferral aufgelöst gesnapshottet, bei
 No-Roll-Items/oversized erst beim Anwenden roh vom Item gelesen.
+
+## Milestone 6 — Fahrzeuge & Drohnen → v2.5.0
+
+**KOMPLETT (Release v2.5.0).** Fahren, Verfolgungsjagd, Rammen, Drohnen.
+
+- ✅ **`vehicle-pilot`** (`PilotVehicleTest`): Fahrzeugwerte-Karte (Handling/Speed inkl. Offroad,
+  Beschleunigung, Rumpf, Panzerung, Pilot, Sensor, Steuerungsmodus). Verfolgungs-Stage als
+  vergleichende Fahrzeugprobe pro Ziel (`chaseOpposed`-Reducer; Nettoerfolge = mögliche
+  Kategorienwechsel, advisory, begrenzt durch max. Beschleunigung).
+- ✅ **Ramm-Advisory** nach GRW: Chase-Rammschaden (Rumpf + Nettoerfolge / halber eigener Rumpf),
+  Rammschadensbänder nach Geschwindigkeit, DK −6, Kontrollproben-Schwellen 2/3. Regel-Helfer
+  `ramDamage`/`chaseRamDamage` mit Vitest-Specs.
+- ✅ **`drone-perception`/`drone-infiltration`** (`DronePerceptionTest`/`DroneInfiltrationTest`).
+- ⚠ Offene Datenlücke (chummer-seitig): Manövrieren/Ausweichen-Pilotpool bleibt 0, weil der
+  Chummer-Export keine Boden/Luft/Wasser-Einordnung liefert. Behandlung siehe P2 der
+  GRW-Abdeckungs-Arbeitsliste.
+
+## Milestone 7 — Charakterbezug (chummer) → chummer v0.10.0
+
+Kein dice-flow-Code; als Kontext dokumentiert: chummer liefert seit v0.10.0 vollständige Chargen/
+Aufstieg (Kontakte, Wissens-/Sprachfertigkeiten, Tradition/Entzugsattribut, Initiation/Metamagien,
+Foki-Bindung), auf die die Magie-/Kampf-Flows aufsetzen (korrektes Entzugsattribut, Skills).
+
+## Milestone 8 — Rigger/Fahrzeug-Actors (chummer) → chummer v0.11.0 / v1.0.x
+
+Kein dice-flow-Code; Kontext: chummer legt Fahrzeuge als eigene `vehicle`-Actors mit Fahrer-
+Verknüpfung an und schreibt Autosoft-Stufen (Clearsight→Perception, Stealth→Sneaking,
+„[Waffe] Zielerfassung"→Gunnery/Blades per-Waffe) auf die Drohnen-Skills. Damit zeigen die
+`vehicle-pilot`/`drone-*`-Flows korrekte Pools.
+
+## Milestone 9 — Matrix-Aktionskatalog → v2.6.0
+
+**KOMPLETT (Release v2.6.0).**
+
+- ✅ **`src/core/matrix-actions.ts`**: alle 29 GRW-Matrixhandlungen mit benötigten Marken, Limit,
+  Legalität (illegal = Angriffs-/Schleicherhandlung, GRW S. 231); Lookup deutsch+englisch.
+- ✅ Angereicherte `matrixOrigin`-Karte: benötigte Marken, Legalität, Misserfolgs-Konsequenz,
+  Overwatch-Hinweis, Spezialnotizen (Ausstöpseln/Auswurfschock, Datenbomben).
+- ✅ `matrix`-Flow matcht zusätzlich `action.categories` `matrix` (deckt `SuccessTest`-Aktionen wie
+  „Datenbombe legen" ab).
+- ⚠ Volle Matrixabwehr / Biofeedback-Auswurfschock noch nicht als dedizierte Interrupt-/Soak-Stufe
+  (laufen nativ). Behandlung siehe P3 der GRW-Abdeckungs-Arbeitsliste.
+
+## Milestone 10 — Edge & Magie-Rest → v3.0.0
+
+**KOMPLETT (Release v3.0.0).**
+
+- ✅ **Edge-Reroll** (siehe M4-Nachtrag oben): Second Chance / Push the Limit auf frischen
+  Transaktionen über System-Re-Execution.
+- ✅ **Zauberabwehr-Advisory** (Antimagie + Abschirmung) auf Kampfzauber-Karten.
+- ✅ **Alchemie**: `spellcasting`-Flow + Potenz-/Verfalls-Hinweis.
+- ✅ **Erfolge kaufen**: Zeile „Erfolge kaufen — X (Pool ÷ 4)" auf einfachen Karten.
+
+## Milestone 11 — GRW-Rest-Lücken & Härtung (geplant)
+
+Arbeitsliste: `/home/foundryvtt/00_NOTES/PLAN-GRW-Abdeckung-diceflow-chummer.md`.
+Ausrüstung verbergen/bemerken (S. 421), Abfangen-Interrupt, Volle Matrixabwehr/Auswurfschock,
+Drogen-Entzugsproben; Contract-Härtung (Zauber Direkt/Indirekt aus chummer-Import).
 
 ## Querschnitt (gilt für jeden Milestone)
 
