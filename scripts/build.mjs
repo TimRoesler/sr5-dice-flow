@@ -1,4 +1,4 @@
 import {build} from 'esbuild'; import {mkdir,copyFile,rm} from 'node:fs/promises'; import {resolve} from 'node:path'; import {createWriteStream} from 'node:fs'; import {execFileSync} from 'node:child_process';
 const root=resolve(import.meta.dirname,'..'); await rm(resolve(root,'dist'),{recursive:true,force:true}); await mkdir(resolve(root,'dist'),{recursive:true});
 await build({entryPoints:[resolve(root,'src/main.ts')],outfile:resolve(root,'dist/sr5-dice-flow.js'),bundle:true,format:'esm',target:'es2022',sourcemap:true,minify:true});
-await mkdir(resolve(root,'release'),{recursive:true}); try{execFileSync('zip',['-qr',resolve(root,'release/sr5-dice-flow.zip'),'module.json','dist','styles','lang','README.md','LICENSE'],{cwd:root});}catch(e){console.warn('ZIP creation skipped:',e.message)}
+await mkdir(resolve(root,'release'),{recursive:true}); try{execFileSync('zip',['-qr',resolve(root,'release/sr5-dice-flow.zip'),'module.json','dist','styles','lang','fonts','README.md','LICENSE'],{cwd:root});}catch(e){console.warn('ZIP creation skipped:',e.message)}
